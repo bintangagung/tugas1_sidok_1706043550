@@ -1,5 +1,9 @@
 package tugas1.sidok.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +26,11 @@ public class PoliModel implements Serializable {
     @Size(max = 30)
     @Column(name="lokasi", nullable = false)
     private String lokasi;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "dokterId", referencedColumnName = "idDokter", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
 
     public Long getIdPoli() {
         return idPoli;

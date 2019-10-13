@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -43,6 +44,12 @@ public class DokterModel implements Serializable {
     @Size(max = 10)
     @Column(name= "tempatLahir", nullable = false)
     private String tempatLahir;
+
+    @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PoliModel> listPoli;
+
+    @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SpesialisasiModel> listSpesialisasi;
 
     public Long getIdDokter() {
         return idDokter;
