@@ -1,0 +1,52 @@
+package tugas1.sidok.model;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+
+@Entity
+@Table(name="spesialisasi")
+public class SpesialisasiModel implements Serializable {
+//    id, nama, dan gelar.
+//    Suatu gelar dapat dimiliki oleh 0 hingga N dokter.
+//    Setiap dokter juga dapat memiliki beberapa spesialisasi.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idSpesialisasi;
+
+    @NotNull
+    @Size(max = 10)
+    @Column(name="nama", nullable = false)
+    private String nama;
+
+    @NotNull
+    @Size(max = 40)
+    @Column(name="gelar", nullable = false)
+    private String gelar;
+
+    public Long getIdSpesialisasi() {
+        return idSpesialisasi;
+    }
+
+    public void setIdSpesialisasi(Long idSpesialisasi) {
+        this.idSpesialisasi = idSpesialisasi;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getGelar() {
+        return gelar;
+    }
+
+    public void setGelar(String gelar) {
+        this.gelar = gelar;
+    }
+
+}
