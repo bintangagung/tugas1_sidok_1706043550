@@ -1,13 +1,10 @@
 package tugas1.sidok.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="poli")
@@ -18,19 +15,17 @@ public class PoliModel implements Serializable {
     private Long idPoli;
 
     @NotNull
-    @Size(max = 20)
+    @Size(max = 255)
     @Column(name="nama", nullable = false)
     private String nama;
 
     @NotNull
-    @Size(max = 30)
+    @Size(max = 255)
     @Column(name="lokasi", nullable = false)
     private String lokasi;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "dokterId", referencedColumnName = "idDokter", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @OneToMany(mappedBy = "poli", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DokterTugasDiPoli> listDokter;
 
     public Long getIdPoli() {
         return idPoli;
@@ -56,5 +51,11 @@ public class PoliModel implements Serializable {
         this.lokasi = lokasi;
     }
 
+    public List<DokterTugasDiPoli> getListDokter() {
+        return listDokter;
+    }
 
+    public void setListDokter(List<DokterTugasDiPoli> listDokter) {
+        this.listDokter = listDokter;
+    }
 }

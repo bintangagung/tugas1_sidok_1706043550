@@ -17,16 +17,16 @@ public class SpesialisasiModel implements Serializable {
     private Long idSpesialisasi;
 
     @NotNull
-    @Size(max = 10)
+    @Size(max = 255)
     @Column(name="nama", nullable = false)
     private String nama;
 
     @NotNull
-    @Size(max = 40)
+    @Size(max = 255)
     @Column(name="gelar", nullable = false)
     private String gelar;
 
-    @OneToMany(mappedBy = "spelialisasi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "spelialisasi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DokterModel> listDokter;
 
     public Long getIdSpesialisasi() {
@@ -37,9 +37,7 @@ public class SpesialisasiModel implements Serializable {
         this.idSpesialisasi = idSpesialisasi;
     }
 
-    public String getNama() {
-        return nama;
-    }
+    public String getNama() { return nama; }
 
     public void setNama(String nama) {
         this.nama = nama;
@@ -53,4 +51,11 @@ public class SpesialisasiModel implements Serializable {
         this.gelar = gelar;
     }
 
+    public List<DokterModel> getListDokter() {
+        return listDokter;
+    }
+
+    public void setListDokter(List<DokterModel> listDokter) {
+        this.listDokter = listDokter;
+    }
 }
