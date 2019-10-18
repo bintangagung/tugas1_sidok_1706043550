@@ -26,7 +26,7 @@ public class DokterPoliModel implements Serializable {
 @Entity
 @Table(name="bertugas")
 @IdClass(DokterPoliModel.class)
-public class DokterTugasDiPoli {
+class DokterTugasDiPoli {
     @Id
     private long dokterId;
     @Id

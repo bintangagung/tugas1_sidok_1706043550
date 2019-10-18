@@ -41,8 +41,7 @@ public class DokterModel implements Serializable {
     @NotNull
     @Size(max = 255)
     @Column(name= "jenisKelamin", nullable = false)
-    private short jenisKelamin;
-    //short itu tipe data apa??
+    private int jenisKelamin;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -58,8 +57,8 @@ public class DokterModel implements Serializable {
     @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "spesialisasiDokter",
-            joinColumns = @JoinColumn(name = 'idDokter'),
-            inversejoinColumns = @JoinColumn(name = "idSpesialisasi")
+            joinColumns = @JoinColumn(name = "idDokter"),
+            inverseJoinColumns = @JoinColumn(name = "idSpesialisasi")
     )
 
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -101,11 +100,11 @@ public class DokterModel implements Serializable {
         this.nama = nama;
     }
 
-    public short getJenisKelamin() {
+    public int getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(short jenisKelamin) {
+    public void setJenisKelamin(int jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
 

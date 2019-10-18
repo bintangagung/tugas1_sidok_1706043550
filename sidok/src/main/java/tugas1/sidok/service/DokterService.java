@@ -10,16 +10,16 @@ public interface DokterService {
     void addDokter(DokterModel dokter);
 
     // Method untuk mendapatkan semua data Dokter yang tersimpan
-    List<DokterModel> getDokterList();
+    List<DokterModel> getListDokter();
 
     // Method untuk mendapatkan data sebuah Dokter berdasarkan idDokter
     Optional<DokterModel> getDokterByIdDokter(Long idDokter);
 
     DokterModel changeDokter(DokterModel dokterModel);
 
-    //viewAll
-    List<DokterModel> getDokterListOrderByNama();
-
     //method delete restoran
     void deleteDokter(DokterModel Dokter);
+
+    //viewAll
+    List<DokterModel> getDokterListOrderByNama();
 }

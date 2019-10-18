@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface DokterDb extends JpaRepository<DokterModel, Long> {
     Optional<DokterModel> findByIdDokter(Long idDokter);
-    Optional<DokterModel> findByNip(String nip);
+//    Optional<DokterModel> findByNip(String nip);
     Optional<DokterModel> findByNik(String nik);
 }
