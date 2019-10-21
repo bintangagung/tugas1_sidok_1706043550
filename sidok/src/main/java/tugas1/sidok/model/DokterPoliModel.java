@@ -43,7 +43,7 @@ class DokterTugasDiPoli {
 
     @ManyToOne
     @JoinColumn(name = "poliId", referencedColumnName = "idPoli", updatable = false, insertable = false)
-    private DokterModel poli;
+    private PoliModel poli;
 
     public long getDokterId() {
         return dokterId;
@@ -77,11 +77,11 @@ class DokterTugasDiPoli {
         this.dokter = dokter;
     }
 
-    public DokterModel getPoli() {
+    public PoliModel getPoli() {
         return poli;
     }
 
-    public void setPoli(DokterModel poli) {
+    public void setPoli(PoliModel poli) {
         this.poli = poli;
     }
 }
