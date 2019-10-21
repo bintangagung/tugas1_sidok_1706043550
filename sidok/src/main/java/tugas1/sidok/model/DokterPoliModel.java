@@ -42,7 +42,7 @@ class DokterTugasDiPoli {
     private DokterModel dokter;
 
     @ManyToOne
-    @JoinColumn(name = "poliId", referencedColumnName = "idPoli", updatable = false, insertable = false)
+    @JoinColumn(name = "PoliId", referencedColumnName = "idPoli", updatable = false, insertable = false)
     private PoliModel poli;
 
     public long getDokterId() {

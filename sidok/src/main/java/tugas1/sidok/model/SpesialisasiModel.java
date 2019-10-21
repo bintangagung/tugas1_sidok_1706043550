@@ -26,7 +26,7 @@ public class SpesialisasiModel implements Serializable {
     @Column(name="gelar", nullable = false)
     private String gelar;
 
-    @ManyToMany(mappedBy = "spelialisasi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "listSpesialisasi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DokterModel> listDokter;
 
     public Long getIdSpesialisasi() {

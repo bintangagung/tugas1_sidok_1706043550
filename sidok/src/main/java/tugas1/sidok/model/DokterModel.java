@@ -1,6 +1,7 @@
 package tugas1.sidok.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -62,6 +63,7 @@ public class DokterModel implements Serializable {
     )
 
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private List<SpesialisasiModel> listSpesialisasi;
 
     @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
