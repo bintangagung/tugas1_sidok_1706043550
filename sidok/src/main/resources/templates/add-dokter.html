@@ -7,7 +7,11 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h1 th:text="'Dokter dengan nama ' + ${namaDokter} + ' berhasil ditambahkan.'" style="align-content: center"></h1>
+
+<div class="jumbotron text-center">
+    <h1 th:text="'Dokter dengan nama ' + ${namaDokter} + ' berhasil ditambahkan.'"></h1>
+</div>
+
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>
 </html>
