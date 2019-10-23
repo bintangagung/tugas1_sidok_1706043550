@@ -23,9 +23,11 @@ public class DokterController {
     private SpesialisasiService spesialisasiService;
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String beranda(Model model) {
+        System.out.println ("masuk home");
         List<DokterModel> listDokter = dokterService.getListDokter();;
         model.addAttribute("listDokter", listDokter);
+        System.out.println ("sebelum beranda");
         return "beranda";
     }
 
@@ -36,7 +38,6 @@ public class DokterController {
         // Membuat objek DokterModel
         DokterModel newDokter = new DokterModel();
         model.addAttribute("dokter", newDokter);
-        model.addAttribute("navbarTitle", "Add Dokter");
         // Return view template
         return "form-add-dokter";
     }
