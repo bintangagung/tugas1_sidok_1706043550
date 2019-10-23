@@ -40,11 +40,6 @@ public class DokterModel implements Serializable {
     private String nama;
 
     @NotNull
-    @Size(max = 255)
-    @Column(name= "jenisKelamin", nullable = false)
-    private int jenisKelamin;
-
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     @Column(name= "tanggalLahir", nullable = false)
@@ -54,6 +49,11 @@ public class DokterModel implements Serializable {
     @Size(max = 255)
     @Column(name= "tempatLahir", nullable = false)
     private String tempatLahir;
+
+    @NotNull
+    @Size(max = 255)
+    @Column(name= "jenisKelamin", nullable = false)
+    private String jenisKelamin;
 
     @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
@@ -102,11 +102,11 @@ public class DokterModel implements Serializable {
         this.nama = nama;
     }
 
-    public int getJenisKelamin() {
+    public String getJenisKelamin() {
         return jenisKelamin;
     }
 
-    public void setJenisKelamin(int jenisKelamin) {
+    public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
 

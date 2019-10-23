@@ -24,7 +24,7 @@ public class DokterPoliModel implements Serializable {
 }
 
 @Entity
-@Table(name="bertugas")
+@Table(name="jadwalJaga")
 @IdClass(DokterPoliModel.class)
 class DokterTugasDiPoli {
     @Id

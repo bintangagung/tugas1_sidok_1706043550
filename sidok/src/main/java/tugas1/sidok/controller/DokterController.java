@@ -2,6 +2,7 @@ package tugas1.sidok.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tugas1.sidok.model.DokterModel;
@@ -11,30 +12,32 @@ import tugas1.sidok.service.SpesialisasiService;
 
 import java.util.List;
 
+@Controller
 public class DokterController {
     @Qualifier("dokterServiceImpl")
     @Autowired
     private DokterService dokterService;
 
-    @Autowired
-    private PoliService poliService;
+//    @Autowired
+//    private PoliService poliService;
+//
+//    @Autowired
+//    private SpesialisasiService spesialisasiService;
 
-    @Autowired
-    private SpesialisasiService spesialisasiService;
-
-    @RequestMapping("/")
+    @RequestMapping(value = "/")
+//    public String home() { return "beranda"; }
     public String beranda(Model model) {
         System.out.println ("masuk home");
         List<DokterModel> listDokter = dokterService.getListDokter();;
         model.addAttribute("listDokter", listDokter);
         System.out.println ("sebelum beranda");
-        return "beranda";
+        return "beranda.html";
     }
 
     // URL mapping yang digunakan untuk mengakses halaman add dokter
     @RequestMapping(value = "/dokter/add", method = RequestMethod.GET)
     public String addDokterFormPage(Model model) {
-
+        System.out.println ("masuk form dokter");
         // Membuat objek DokterModel
         DokterModel newDokter = new DokterModel();
         model.addAttribute("dokter", newDokter);
@@ -45,8 +48,11 @@ public class DokterController {
     // URL mapping yang digunakan untuk submit form yang telah anda masukkan pada halaman add dokter
     @RequestMapping(value = "/dokter/add", method = RequestMethod.POST)
     public String addDokterSubmit(@ModelAttribute DokterModel dokter, Model model) {
+        System.out.println ("masuk add dokter");
         dokterService.addDokter(dokter);
+        System.out.println ("berhasil add dokter");
         model.addAttribute("namaDokter", dokter.getNama());
+        model.addAttribute("nipDokter", dokter.getNip());
         return "add-dokter";
     }
 

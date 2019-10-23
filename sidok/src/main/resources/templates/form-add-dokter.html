@@ -2,38 +2,31 @@
 <html xmlns:th="http://www.thymelaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> Add Restoran </title>
+    <title> Add Dokter </title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h3> Tambah Restoran</h3>
-<form th:action="@{/restoran/add}" th:objects="${restoran}" method="POST">
+<h3> Tambah Dokter</h3>
+<form th:action="@{/dokter/add}" class="form" th:objects="${dokter}" method="POST">
 
-    Nama: <br>
-    <input type="text" name="nama"/>
-    <br>
-    Alamat: <br>
-    <input type="text" name="alamat"/>
-    <br>
-    Nomor Telepon: <br>
-    <input type="number" name="nomorTelepon"/>
-    <br>
-    private String nip;
+    <label>Nama :</label>
+    <input type="text" name="nama"/> <br>
+    <label>NIK :</label>
+    <input type="number" name="nik"/> <br>
+    <label>Tanggal Lahir :</label>
+    <input type="date" name="tanggalLahir"/> <br>
+    <label>Tempat Lahir :</label>
+    <input type="text" name="tempatLahir"/> <br>
+    <label>Jenis Kelamin :</label>
+    <input name="jenisKelamin" type="radio" value="1"/> Laki-Laki <input name="jenisKelamin" type="radio" value="2"/> Perempuan <br>
+    <label>Spesialisasi :</label>
+    <input type="text" name="spesialisasi"/>
+    <th><button type="submit" name="tambahSpesialisasi">Tambah</button></th> <br>
 
-    private String nik;
-
-    rivate String nama;
-
-    private int jenisKelamin;
-    private Date tanggalLahir;
-    private String tempatLahir;
-
-
-
-
-    <button type="submit"> Submit </button>
+<!--    <input type="hidden" name="nip" value="'tahunlahir+5' + 'tanggalahir' + 'jenisKelamin' + 'random karakter'"/> <br>-->
+    <button type="submit" class="btn-primary"> Submit </button>
 </form>
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>

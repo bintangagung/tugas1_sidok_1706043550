@@ -14,19 +14,19 @@
 <div class="container-fluid">
     <h2> Sistem Informasi Dokter</h2>
 
-    <button class="btn btn-primary">
-        <div th:each="resto : ${restoranList}">
-            <h3 th:text="'ID Restoran: ' + ${resto.idRestoran}"></h3>
-            <h3 th:text="'Nama Restoran: ' + ${resto.nama}"></h3>
-            <h3 th:text="'Alamat Restoran: ' + ${resto.alamat}"></h3>
-            <h3 th:text="'Nomor Telp.Restoran: ' + ${resto.nomorTelepon}"></h3>
-        </div>
-    </button>
+<!--    <button class="btn btn-primary">-->
+<!--        <div th:each="resto : ${dokterList}">-->
+<!--            <h3 th:text="'ID Restoran: ' + ${resto.idRestoran}"></h3>-->
+<!--            <h3 th:text="'Nama Restoran: ' + ${resto.nama}"></h3>-->
+<!--            <h3 th:text="'Alamat Restoran: ' + ${resto.alamat}"></h3>-->
+<!--            <h3 th:text="'Nomor Telp.Restoran: ' + ${resto.nomorTelepon}"></h3>-->
+<!--        </div>-->
+<!--    </button>-->
     <hr>
 </div>
 
-<form th:action="@{'/dokter/add/'+${idDokter}}" th:object="${dokter}" method="POST">
-    <input type="hidden" th:field="*{idDokter}" />
+<!--<form th:action="@{'/dokter/add/'+${idDokter}}" th:object="${dokter}" method="POST">-->
+<!--    <input type="hidden" th:field="*{idDokter}" />-->
 <!--    <table>-->
 <!--        <thead>-->
 <!--        <tr>-->
@@ -54,9 +54,9 @@
 <!--        </tr>-->
 <!--        </tbody>-->
 <!--    </table>-->
-    <br>
-    <button type="submit" name="addDokter" class="btn btn-sm btn-outline-primary">Tambah Dokter</button>
-</form>
+<!--    <br>-->
+<!--    <button type="submit" name="addDokter" class="btn btn-sm btn-outline-primary">Tambah Dokter</button>-->
+<!--</form>-->
 
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>
