@@ -1,5 +1,6 @@
 package tugas1.sidok.controller;
 
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,10 @@ import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.PoliService;
 import tugas1.sidok.service.SpesialisasiService;
 
+import java.nio.charset.Charset;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class DokterController {
@@ -25,13 +29,12 @@ public class DokterController {
 //    private SpesialisasiService spesialisasiService;
 
     @RequestMapping(value = "/")
-//    public String home() { return "beranda"; }
     public String beranda(Model model) {
         System.out.println ("masuk home");
         List<DokterModel> listDokter = dokterService.getListDokter();;
         model.addAttribute("listDokter", listDokter);
         System.out.println ("sebelum beranda");
-        return "beranda.html";
+        return "beranda";
     }
 
     // URL mapping yang digunakan untuk mengakses halaman add dokter
@@ -48,8 +51,16 @@ public class DokterController {
     // URL mapping yang digunakan untuk submit form yang telah anda masukkan pada halaman add dokter
     @RequestMapping(value = "/dokter/add", method = RequestMethod.POST)
     public String addDokterSubmit(@ModelAttribute DokterModel dokter, Model model) {
-        System.out.println ("masuk add dokter");
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random rnd = new Random();
+        char generatedRandom = chars.charAt(rnd.nextInt(2));
+        int tahunLahir = LocalDateTime.now().getYear() + 5 ;
+        String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
+        String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
+        dokter.setNip(nip);
+
         dokterService.addDokter(dokter);
+
         System.out.println ("berhasil add dokter");
         model.addAttribute("namaDokter", dokter.getNama());
         model.addAttribute("nipDokter", dokter.getNip());

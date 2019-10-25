@@ -16,7 +16,7 @@
     <label>NIK :</label>
     <input type="number" name="nik"/> <br>
     <label>Tanggal Lahir :</label>
-    <input type="date" name="tanggalLahir"/> <br>
+    <input type="date" data-date-format="DDMMYYYY" name="tanggalLahir"/> <br>
     <label>Tempat Lahir :</label>
     <input type="text" name="tempatLahir"/> <br>
     <label>Jenis Kelamin :</label>
@@ -24,8 +24,8 @@
     <label>Spesialisasi :</label>
     <input type="text" name="spesialisasi"/>
     <th><button type="submit" name="tambahSpesialisasi">Tambah</button></th> <br>
+    <input type="hidden" name="nip" value="masih kosong"/> <br>
 
-<!--    <input type="hidden" name="nip" value="'tahunlahir+5' + 'tanggalahir' + 'jenisKelamin' + 'random karakter'"/> <br>-->
     <button type="submit" class="btn-primary"> Submit </button>
 </form>
 </body>
