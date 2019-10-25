@@ -56,9 +56,12 @@ public class DokterController {
         char generatedRandom = chars.charAt(rnd.nextInt(2));
         int tahunLahir = LocalDateTime.now().getYear() + 5 ;
         String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
+
         String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
         dokter.setNip(nip);
 
+        if (dokter.getJenisKelamin().equals("1")) dokter.setJenisKelamin("Laki-Laki");
+        if (dokter.getJenisKelamin().equals("2")) dokter.setJenisKelamin("Perempuan");
         dokterService.addDokter(dokter);
 
         System.out.println ("berhasil add dokter");

@@ -12,52 +12,40 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container-fluid">
-    <h2> Sistem Informasi Dokter</h2>
+    <h2> Sistem Informasi Dokter </h2>
+    <h3 class="badge-light text-lg-left"> Daftar Dokter </h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIP</th>
+                <th>NIK</th>
+                <th>Jenis Kelamin</th>
+                <th>Spesialisasi</th>
+                <th>            </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dokter : ${listDokter}">
+            <td><h4> x </h4></td>
+            <td><h4 th:text = ${dokter.nama}></h4></td>
+            <td><h4 th:text = ${dokter.nip}></h4></td>
+            <td><h4 th:text = ${dokter.nik}></h4></td>
+            <td><h4 th:text = ${dokter.jenisKelamin}></h4></td>
+            <td><h4 th:text = ${dokter.listSpesialisasi}></h4>-</td>
+            <td>
+                <button type="submit" name="addJadwal" class="btn btn-sm btn-primary">Tambah Jadwal</button>
+                <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>
+                <button type="submit" name="removeDokter" class="btn btn-sm btn-danger">hapus</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <button type="submit" name="addDokter" class="btn btn-sm btn-outline-primary">Tambah Dokter</button>
 
-<!--    <button class="btn btn-primary">-->
-<!--        <div th:each="resto : ${dokterList}">-->
-<!--            <h3 th:text="'ID Restoran: ' + ${resto.idRestoran}"></h3>-->
-<!--            <h3 th:text="'Nama Restoran: ' + ${resto.nama}"></h3>-->
-<!--            <h3 th:text="'Alamat Restoran: ' + ${resto.alamat}"></h3>-->
-<!--            <h3 th:text="'Nomor Telp.Restoran: ' + ${resto.nomorTelepon}"></h3>-->
-<!--        </div>-->
-<!--    </button>-->
-    <hr>
 </div>
-
-<!--<form th:action="@{'/dokter/add/'+${idDokter}}" th:object="${dokter}" method="POST">-->
-<!--    <input type="hidden" th:field="*{idDokter}" />-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>No</th>-->
-<!--            <th>Nama</th>-->
-<!--            <th>NIP</th>-->
-<!--            <th>NIK</th>-->
-<!--            <th>Jenis Kelamin</th>-->
-<!--            <th>Spesialisasi</th>-->
-<!--            <th>            </th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="dokter, rowStat : *{listDokter}">-->
-<!--            <td><input type="text" th:field="*{listDokter[__${rowStat.index}__].nama}"/></td>-->
-<!--            <td><input type="text" th:field="*{listDokter[__${rowStat.index}__].nip}"/></td>-->
-<!--            <td><input type="number" th:field="*{listDokter[__${rowStat.index}__].nik}"/></td>-->
-<!--            <td><input type="number" th:field="*{listDokter[__${rowStat.index}__].jenisKelamin}"/></td>-->
-<!--            <td><input type="number" th:field="*{listDokter[__${rowStat.index}__].jenisKelamin}"/>-</td>-->
-<!--            <td>-->
-<!--                <button type="submit" name="addJadwal" class="btn btn-sm btn-primary">Tambah Jadwal</button>-->
-<!--                <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>-->
-<!--                <button type="submit" name="removeDokter" class="btn btn-sm btn-danger" th:value="${rowStat.index}">hapus</button>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--    <br>-->
-<!--    <button type="submit" name="addDokter" class="btn btn-sm btn-outline-primary">Tambah Dokter</button>-->
-<!--</form>-->
-
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>
 
