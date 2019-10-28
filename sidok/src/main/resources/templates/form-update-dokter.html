@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Update Dokter </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<h3> Ubah Dokter</h3>
+<form th:action="@{/dokter/update/{idDokter}(idDokter=${dokter.idDokter})}" class="form-group" th:objects="${dokter}" method="POST">
+    <input type="hidden" th:field="${dokter.idDokter}" />
+
+    <label class="col-sm-1 control-label">Nama</label>
+    <input type="text" class="form-control-sm" name="nama" value="${dokter.nama}"/> <br>
+    <label class="col-sm-1 control-label">NIK</label>
+    <input type="number" class="form-control-sm" name="nik" value="${dokter.nik}"/> <br>
+    <label class="col-sm-1 control-label">Tanggal Lahir</label>
+    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" name="tanggalLahir" value="${dokter.tanggalLahir}"/> <br>
+    <label class="col-sm-1 control-label">Tempat Lahir</label>
+    <input type="text" class="form-control-sm" name="tempatLahir" value="${dokter.tempatLahir}"/> <br>
+    <label class="col-sm-1 control-label">Jenis Kelamin</label>
+    <select class="form-control-sm" name="jenisKelamin" value="${dokter.jenisKelamin}">
+        <option value="1">Laki-Laki</option>
+        <option value="2">Perempuan</option>
+    </select>
+    <br>
+
+    <input type="hidden" name="nip" value="masih kosong"/> <br>
+
+    <button type="submit" class="btn-sm btn-primary"> Submit </button>
+</form>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+</html>

@@ -25,11 +25,12 @@ public class DokterServiceImpl implements DokterService {
     public Optional<DokterModel> getDokterByIdDokter(Long idDokter) {
         return dokterDb.findByIdDokter(idDokter);
     }
-//    @Override
-//    public Optional<DokterModel> getDokterByNik(String nik) {
-//        return dokterDb.findByNik(nik);
-//    }
-//
+
+    @Override
+    public Optional<DokterModel> getDokterByNikDokter(String nik) {
+        return dokterDb.findByNik(nik);
+    }
+
 //    @Override
 //    public Optional<DokterModel> getDokterByNip(String nip) {
 //        return dokterDb.findByNip(nip);
@@ -37,7 +38,7 @@ public class DokterServiceImpl implements DokterService {
 
     @Override
     public DokterModel changeDokter(DokterModel dokterModel) {
-        DokterModel targetDokter = dokterDb.findById(dokterModel.getIdDokter()).get();
+        DokterModel targetDokter = dokterDb.findByIdDokter(dokterModel.getIdDokter()).get();
         try {
             targetDokter.setNama(dokterModel.getNama());
             targetDokter.setNip(dokterModel.getNip());

@@ -25,9 +25,9 @@ public class DokterController {
 
 //    @Autowired
 //    private PoliService poliService;
-//
-//    @Autowired
-//    private SpesialisasiService spesialisasiService;
+
+    @Autowired
+    private SpesialisasiService spesialisasiService;
 
     @RequestMapping(value = "/")
     public String beranda(Model model) {
@@ -79,13 +79,13 @@ public class DokterController {
     @RequestMapping(path = "/dokter", method = RequestMethod.GET)
     public String view(
             // Request Parameter untuk dipass
-            @RequestParam(value = "idDokter") Long idDokter, Model model
+            @RequestParam(value = "nik") String nik, Model model
     ) {
 
         // Mengambil objek DokterModel yang dituju
-        DokterModel dokter = dokterService.getDokterByIdDokter(idDokter).get();
+        DokterModel dokter = dokterService.getDokterByNikDokter(nik).get();
 
-//        List<SpesialisasiModel> spesialisList = SpesialisasiService.getListSpesialisasi(dokter.getIdDokter());
+//        List<SpesialisasiModel> spesialisList = SpesialisasiService.getListSpesialisasi(dokter.getNik());
 //        dokter.setListSpesialisasi(spesialisList);
 
         // Add model restoran ke "dokter" untuk dirender
@@ -95,25 +95,34 @@ public class DokterController {
         return "view-dokter";
     }
 
-//    //API yang digunakan untuk menuju halaman form change restoran
-//    @RequestMapping(value = "restoran/change/{idRestoran}", method = RequestMethod.GET)
-//    public String changeRestoranFormPage(@PathVariable Long idRestoran, Model model) {
-//        //mengambil existing data restoran
-//        RestoranModel existingRestoran = restoranService.getRestoranByIdRestoran(idRestoran).get();
-//        model.addAttribute("restoran", existingRestoran);
-//        model.addAttribute("navbarTitle", "Change Restoran");
-//
-//        return "form-change-restoran";
-//    }
+    //API yang digunakan untuk menuju halaman form update dokter
+    @RequestMapping(value = "dokter/update/{idDokter}", method = RequestMethod.GET)
+    public String changeDokterFormPage(@PathVariable Long idDokter, Model model) {
+        //mengambil existing data dokter
+        DokterModel existingDokter = dokterService.getDokterByIdDokter(idDokter).get();
+        model.addAttribute("dokter", existingDokter);
 
-//    //API yang digunakan untuk submit form change restoran
-//    @RequestMapping(value = "restoran/change/{idRestoran}", method = RequestMethod.POST)
-//    public String changeRestoranFormSubmit(@PathVariable Long idRestoran, @ModelAttribute RestoranModel restoran, Model model) {
-//        RestoranModel newRestoranData = restoranService.changeRestoran(restoran);
-//        model.addAttribute("restoran", newRestoranData);
-//
-//        return "change-restoran";
-//    }
+        return "form-update-dokter";
+    }
+
+    //API yang digunakan untuk submit form update dokter
+    @RequestMapping(value = "dokter/update/{idDokter}", method = RequestMethod.POST)
+    public String changeDokterFormSubmit(@PathVariable Long idDokter, @ModelAttribute DokterModel dokter, Model model) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random rnd = new Random();
+        char generatedRandom = chars.charAt(rnd.nextInt(2));
+        int tahunLahir = LocalDateTime.now().getYear() + 5 ;
+        String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
+        String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
+        dokter.setNip(nip);
+        if (dokter.getJenisKelamin().equals("1")) dokter.setJenisKelamin("Laki-Laki");
+        if (dokter.getJenisKelamin().equals("2")) dokter.setJenisKelamin("Perempuan");
+        DokterModel newDokterData = dokterService.changeDokter(dokter);
+
+        model.addAttribute("namaDokter", newDokterData.getNama());
+        model.addAttribute("nipDokter", newDokterData.getNip());
+        return "update-dokter";
+    }
 
 //    //tampilan viewAll
 //    @RequestMapping(path = "/restoran/view-all")
@@ -128,21 +137,16 @@ public class DokterController {
 //        return "view-all-dokter";
 //    }
 
-//    //delete restoran
-//    @RequestMapping(path = "/restoran/delete/{idRestoran}", method = RequestMethod.GET)
-//    public String deleteRestoran(@PathVariable Long idRestoran, Model model) {
-//        // Mengambil objek RestoranModel yang dituju
-//        RestoranModel restoran = restoranService.getRestoranByIdRestoran(idRestoran).get();
-//        if (restoran.getListMenu().isEmpty()) {
-//            restoranService.deleteRestoran(restoran);
-//            model.addAttribute("restoran", restoran);
-//            model.addAttribute("navbarTitle", "Delete Restoran");
-//            return "delete-restoran";
-//        }
-//        else {
-//            model.addAttribute("restoran", restoran);
-//            model.addAttribute("navbarTitle", "Delete Restoran Gagal");
-//            return "delete-restoran-gagal";
-//        }
-//    }
+    @RequestMapping(path = "/dokter/delete/{idDokter}", method = RequestMethod.GET)
+    public String deleteDokter(@PathVariable Long idDokter, Model model) {
+        // Mengambil objek DokterModel yang dituju
+        DokterModel dokter = dokterService.getDokterByIdDokter(idDokter).get();
+        dokterService.deleteDokter(dokter);
+
+        //hapus jadwal dokter dipoli BELOOOM
+        model.addAttribute("namaDokter", dokter.getNama());
+        model.addAttribute("nipDokter", dokter.getNip());
+        return "delete-dokter";
+    }
+
 }

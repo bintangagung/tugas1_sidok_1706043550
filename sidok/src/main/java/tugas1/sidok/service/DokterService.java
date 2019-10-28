@@ -15,9 +15,11 @@ public interface DokterService {
     // Method untuk mendapatkan data sebuah Dokter berdasarkan idDokter
     Optional<DokterModel> getDokterByIdDokter(Long idDokter);
 
+    // Method untuk mendapatkan data sebuah Dokter berdasarkan idDokter
+    Optional<DokterModel> getDokterByNikDokter(String nik);
+
     DokterModel changeDokter(DokterModel dokterModel);
 
-    //method delete restoran
     void deleteDokter(DokterModel Dokter);
 
     //viewAll

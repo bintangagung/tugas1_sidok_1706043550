@@ -21,8 +21,8 @@ public class SpesialisasiServiceImpl implements SpesialisasiService {
     }
 
     @Override
-    public List<SpesialisasiModel> getListSpesialisasi(long idDokter) {
-        return spesialisasiDb.findByDokterIdDokter(idDokter);
+    public List<SpesialisasiModel> getListSpesialisasi(String nik) {
+        return spesialisasiDb.findByNik(nik);
     }
 
 }

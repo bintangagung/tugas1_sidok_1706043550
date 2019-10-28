@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface SpesialisasiService {
     List<SpesialisasiModel> findAllSpesialisasiByIdDokter(long idDokter);
-    List<SpesialisasiModel> getListSpesialisasi(long idDokter);
+    List<SpesialisasiModel> getListSpesialisasi(String nik);
 }
