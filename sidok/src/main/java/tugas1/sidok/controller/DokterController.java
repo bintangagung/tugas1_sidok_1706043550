@@ -75,6 +75,26 @@ public class DokterController {
         return "add-dokter";
     }
 
+    // URL mapping view
+    @RequestMapping(path = "/dokter", method = RequestMethod.GET)
+    public String view(
+            // Request Parameter untuk dipass
+            @RequestParam(value = "idDokter") Long idDokter, Model model
+    ) {
+
+        // Mengambil objek DokterModel yang dituju
+        DokterModel dokter = dokterService.getDokterByIdDokter(idDokter).get();
+
+//        List<SpesialisasiModel> spesialisList = SpesialisasiService.getListSpesialisasi(dokter.getIdDokter());
+//        dokter.setListSpesialisasi(spesialisList);
+
+        // Add model restoran ke "dokter" untuk dirender
+        model.addAttribute("dokter", dokter);
+
+        // return view template
+        return "view-dokter";
+    }
+
 //    //API yang digunakan untuk menuju halaman form change restoran
 //    @RequestMapping(value = "restoran/change/{idRestoran}", method = RequestMethod.GET)
 //    public String changeRestoranFormPage(@PathVariable Long idRestoran, Model model) {
@@ -95,18 +115,18 @@ public class DokterController {
 //        return "change-restoran";
 //    }
 
-    //tampilan viewAll
-    @RequestMapping(path = "/restoran/view-all")
-    public String viewAll(Model model) {
-        List<DokterModel> dokterList = dokterService.getListDokter();
-        List<DokterModel> dokterListAlphabet = dokterService.getDokterListOrderByNama();
-
-        model.addAttribute("dokterList", dokterList);
-        model.addAttribute("dokterListAlphabet", dokterListAlphabet);
-        model.addAttribute("navbarTitle", "View All Dokter");
-
-        return "view-all-dokter";
-    }
+//    //tampilan viewAll
+//    @RequestMapping(path = "/restoran/view-all")
+//    public String viewAll(Model model) {
+//        List<DokterModel> dokterList = dokterService.getListDokter();
+//        List<DokterModel> dokterListAlphabet = dokterService.getDokterListOrderByNama();
+//
+//        model.addAttribute("dokterList", dokterList);
+//        model.addAttribute("dokterListAlphabet", dokterListAlphabet);
+//        model.addAttribute("navbarTitle", "View All Dokter");
+//
+//        return "view-all-dokter";
+//    }
 
 //    //delete restoran
 //    @RequestMapping(path = "/restoran/delete/{idRestoran}", method = RequestMethod.GET)

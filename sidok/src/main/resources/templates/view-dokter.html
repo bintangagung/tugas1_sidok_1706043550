@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Home </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <h3 class="badge-light text-lg-center"> Detail Dokter </h3>
+        <p class="col-sm-1 control-label">Nama</p> <p th:text = ${dokter.nama}></p>
+        <p class="col-sm-1 control-label">NIP</p> <p th:text = ${dokter.nip}></p>
+        <p class="col-sm-1 control-label">NIK</p> <p th:text = ${dokter.nik}></p>
+        <p class="col-sm-1 control-label">Tempat Lahir</p> <p th:text = ${dokter.tempatLahir}></p>
+        <p class="col-sm-1 control-label">Tanggal Lahir</p> <p th:text = ${dokter.tanggalLahir}></p>
+        <p class="col-sm-1 control-label">Jenis Kelamin</p> <p th:text = ${dokter.jenisKelamin}></p>
+        <p class="col-sm-1 control-label">Spesialisasi</p>
+        <br>
+        <br>
+        <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>
+        <button type="submit" name="removeDokter" class="btn btn-sm btn-danger">hapus</button>
+        <br>
+        <a class="btn btn-link" th:href="'/'" style="justify-content: center">Kembali Ke Home</a>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>
