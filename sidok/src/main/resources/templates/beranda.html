@@ -12,7 +12,7 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container-fluid">
-    <h2> Sistem Informasi Dokter </h2>
+    <h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
     <h3 class="badge-light text-lg-left"> Daftar Dokter </h3>
     <table class="table table-striped">
         <thead>
@@ -27,13 +27,18 @@
             </tr>
         </thead>
         <tbody>
-        <tr th:each="dokter : ${listDokter}">
-            <td><h4> x </h4></td>
+        <tr th:each="dokter, iterationStatus: ${listDokter}">
+            <td><h4 th:text = ${iterationStatus.count}></h4></td>
             <td><h4 th:text = ${dokter.nama}></h4></td>
             <td><h4 th:text = ${dokter.nip}></h4></td>
             <td><h4 th:text = ${dokter.nik}></h4></td>
             <td><h4 th:text = ${dokter.jenisKelamin}></h4></td>
-            <td><h4 th:text = ${dokter.listSpesialisasi}></h4>-</td>
+            <td >
+                <h4 th:if="${dokter.listSpesialisasi == null}" th:text="-"></h4>
+                <div th:unless="${dokter.listSpesialisasi == null}"th:each = "spesialisasi: ${dokter.listSpesialisasi}">
+                    <h4 th:text="${spesialisasi.nama}"></h4>
+                </div>
+            </td>
             <td>
                 <button type="submit" name="addJadwal" class="btn btn-sm btn-primary">Tambah Jadwal</button>
                 <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>
@@ -43,7 +48,7 @@
         </tbody>
     </table>
     <br>
-    <button type="submit" name="addDokter" class="btn btn-sm btn-outline-primary">Tambah Dokter</button>
+    <a class="btn btn-sm btn-dark" th:href="'/dokter/tambah'">Tambah Dokter</a>
 
 </div>
 </body>

@@ -9,24 +9,44 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <h3> Tambah Dokter</h3>
-<form th:action="@{/dokter/add}" class="form" th:objects="${dokter}" method="POST">
+<form th:action="@{/dokter/tambah}" class="form-group" th:objects="${dokter}" method="POST">
 
-    <label>Nama :</label>
-    <input type="text" name="nama"/> <br>
-    <label>NIK :</label>
-    <input type="number" name="nik"/> <br>
-    <label>Tanggal Lahir :</label>
-    <input type="date" data-date-format="DDMMYYYY" name="tanggalLahir"/> <br>
-    <label>Tempat Lahir :</label>
-    <input type="text" name="tempatLahir"/> <br>
-    <label>Jenis Kelamin :</label>
-    <input name="jenisKelamin" type="radio" value="1"/> Laki-Laki <input name="jenisKelamin" type="radio" value="2"/> Perempuan <br>
-    <label>Spesialisasi :</label>
-    <input type="text" name="spesialisasi"/>
-    <th><button type="submit" name="tambahSpesialisasi">Tambah</button></th> <br>
+    <label class="col-sm-1 control-label">Nama</label>
+    <input type="text" class="form-control-sm" name="nama"/> <br>
+    <label class="col-sm-1 control-label">NIK</label>
+    <input type="number" class="form-control-sm" name="nik"/> <br>
+    <label class="col-sm-1 control-label">Tanggal Lahir</label>
+    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" name="tanggalLahir"/> <br>
+    <label class="col-sm-1 control-label">Tempat Lahir</label>
+    <input type="text" class="form-control-sm" name="tempatLahir"/> <br>
+    <label class="col-sm-1 control-label">Jenis Kelamin</label>
+    <select class="form-control-sm" name="jenisKelamin">
+        <option value="1">Laki-Laki</option>
+        <option value="2">Perempuan</option>
+    </select>
+    <br>
+    <label class="col-sm-1 control-label">Spesialisasi</label>
+    <select class="form-control-sm" name="spesialis">
+        <option>Spesialis Patologi Klinik</option>
+        <option>Spesialis Parasitologi Klinik</option>
+        <option>Spesialis Urologi</option>
+        <option>Spesialis Gizi Klinik</option>
+        <option>Spesialis Anak</option>
+        <option>Spesialis Anestesiologi dan Terapi Intensif</option>
+        <option>Spesialis Bedah</option>
+        <option>Spesialis Bedah Plastik Rekonstruksi dan Estetik</option>
+        <option>Spesialis Farmakologi Klinik</option>
+        <option>Spesialis Jantung dan Pembuluh Darah</option>
+        <option>Spesialis Konservasi Gigi</option>
+        <option>Spesialis Bedah Orthopaedi dan Traumatologi</option>
+        <option>Spesialis Penyakit Dalam</option>
+        <option>Spesialis Saraf</option>
+        <option>Spesialis Radiologi</option>
+    </select>
+    <th><button type="submit" name="tambahSpesialisasi" class="btn-outline-primary">Tambah</button></th> <br>
     <input type="hidden" name="nip" value="masih kosong"/> <br>
 
-    <button type="submit" class="btn-primary"> Submit </button>
+    <button type="submit" class="btn-sm btn-primary"> Submit </button>
 </form>
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>

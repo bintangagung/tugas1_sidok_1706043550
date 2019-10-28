@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tugas1.sidok.model.DokterModel;
+import tugas1.sidok.model.SpesialisasiModel;
 import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.PoliService;
 import tugas1.sidok.service.SpesialisasiService;
@@ -31,14 +32,14 @@ public class DokterController {
     @RequestMapping(value = "/")
     public String beranda(Model model) {
         System.out.println ("masuk home");
-        List<DokterModel> listDokter = dokterService.getListDokter();;
+        List<DokterModel> listDokter = dokterService.getListDokter();
         model.addAttribute("listDokter", listDokter);
         System.out.println ("sebelum beranda");
         return "beranda";
     }
 
     // URL mapping yang digunakan untuk mengakses halaman add dokter
-    @RequestMapping(value = "/dokter/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/dokter/tambah", method = RequestMethod.GET)
     public String addDokterFormPage(Model model) {
         System.out.println ("masuk form dokter");
         // Membuat objek DokterModel
@@ -49,7 +50,7 @@ public class DokterController {
     }
 
     // URL mapping yang digunakan untuk submit form yang telah anda masukkan pada halaman add dokter
-    @RequestMapping(value = "/dokter/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/dokter/tambah", method = RequestMethod.POST)
     public String addDokterSubmit(@ModelAttribute DokterModel dokter, Model model) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Random rnd = new Random();
@@ -64,6 +65,10 @@ public class DokterController {
         if (dokter.getJenisKelamin().equals("2")) dokter.setJenisKelamin("Perempuan");
         dokterService.addDokter(dokter);
 
+        System.out.println ("berhasil add dokter");
+        System.out.println (dokter.getJenisKelamin());
+        System.out.println (dokter.getNip());
+        System.out.println (dokter.getNik());
         System.out.println ("berhasil add dokter");
         model.addAttribute("namaDokter", dokter.getNama());
         model.addAttribute("nipDokter", dokter.getNip());
