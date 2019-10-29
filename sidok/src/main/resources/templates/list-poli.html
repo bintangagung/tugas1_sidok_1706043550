@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Poli </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-fluid">
+    <h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
+    <h3 class="badge-light text-lg-left"> Daftar Poli </h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Lokasi</th>
+            <th>            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="poli, iterationStatus: ${listPoli}">
+            <td><h4 th:text = ${iterationStatus.count}></h4></td>
+            <td><h4 th:text = ${poli.nama}></h4></td>
+            <td><h4 th:text = ${poli.lokasi}></h4></td>
+            <td>
+                <button type="submit" name="changePoli" class="btn btn-sm btn-dark">Ubah</button>
+                <button type="submit" name="removePoli" class="btn btn-sm btn-danger">hapus</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a class="btn btn-sm btn-dark" th:href="'/poli/tambah'">Tambah Poli</a>
+
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>

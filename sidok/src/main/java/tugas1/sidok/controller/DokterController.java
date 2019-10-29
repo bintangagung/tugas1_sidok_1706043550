@@ -88,7 +88,7 @@ public class DokterController {
 //        List<SpesialisasiModel> spesialisList = SpesialisasiService.getListSpesialisasi(dokter.getNik());
 //        dokter.setListSpesialisasi(spesialisList);
 
-        // Add model restoran ke "dokter" untuk dirender
+        // Add model dokter ke "dokter" untuk dirender
         model.addAttribute("dokter", dokter);
 
         // return view template
@@ -123,19 +123,6 @@ public class DokterController {
         model.addAttribute("nipDokter", newDokterData.getNip());
         return "update-dokter";
     }
-
-//    //tampilan viewAll
-//    @RequestMapping(path = "/restoran/view-all")
-//    public String viewAll(Model model) {
-//        List<DokterModel> dokterList = dokterService.getListDokter();
-//        List<DokterModel> dokterListAlphabet = dokterService.getDokterListOrderByNama();
-//
-//        model.addAttribute("dokterList", dokterList);
-//        model.addAttribute("dokterListAlphabet", dokterListAlphabet);
-//        model.addAttribute("navbarTitle", "View All Dokter");
-//
-//        return "view-all-dokter";
-//    }
 
     @RequestMapping(path = "/dokter/delete/{idDokter}", method = RequestMethod.GET)
     public String deleteDokter(@PathVariable Long idDokter, Model model) {
