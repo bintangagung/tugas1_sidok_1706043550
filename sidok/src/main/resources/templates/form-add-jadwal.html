@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Jadwal </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h2 style="text-align:center;"> Tambah Jadwal Jaga Poli Seorang Dokter </h2>
+
+
+
+
+            <h3 class="badge-light text-lg-left"> Daftar Poli </h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Hari</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="jadwal, iterationStatus: ${listJadwal}">
+                    <td><h5 th:text = ${iterationStatus.count}></h5></td>
+                    <td><h5 th:text = ${jadwal.nama}></h5></td>
+                    <td><h5 th:text = ${jadwal.hari}></h5></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>

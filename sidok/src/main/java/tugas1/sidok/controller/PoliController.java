@@ -56,24 +56,24 @@ public class PoliController {
     }
 
     // URL mapping view
-    @RequestMapping(path = "/poli/view", method = RequestMethod.GET)
-    public String view(
-            // Request Parameter untuk dipass
-            @RequestParam(value = "idPoli") Long idPoli, Model model
-    ) {
-
-        // Mengambil objek PoliModel yang dituju
-        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
-
-//        List<PoliModel> poliList = PoliService.getListPoli(poli.getIdPoli());
-//        poli.setListPoli(poliList);
-
-        // Add model poli ke "poli" untuk dirender
-        model.addAttribute("poli", poli);
-
-        // return view template
-        return "view-poli";
-    }
+//    @RequestMapping(path = "/poli/view", method = RequestMethod.GET)
+//    public String view(
+//            // Request Parameter untuk dipass
+//            @RequestParam(value = "idPoli") Long idPoli, Model model
+//    ) {
+//
+//        // Mengambil objek PoliModel yang dituju
+//        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
+//
+////        List<PoliModel> poliList = PoliService.getListPoli(poli.getIdPoli());
+////        poli.setListPoli(poliList);
+//
+//        // Add model poli ke "poli" untuk dirender
+//        model.addAttribute("poli", poli);
+//
+//        // return view template
+//        return "view-poli";
+//    }
 
     //API yang digunakan untuk menuju halaman form update poli
     @RequestMapping(value = "poli/update/{idPoli}", method = RequestMethod.GET)
