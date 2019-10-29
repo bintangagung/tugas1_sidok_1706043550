@@ -4,7 +4,7 @@ import tugas1.sidok.model.JadwalJagaModel;
 
 import java.util.List;
 
-public interface JadwalService {
+public interface JadwalJagaService {
     // Method untuk menambah Jadwal
     void addJadwalJaga(JadwalJagaModel jadwalJaga);
 

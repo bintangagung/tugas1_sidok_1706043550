@@ -42,7 +42,9 @@
                 </div>
             </td>
             <td>
-                <button type="submit" name="addJadwal" class="btn btn-sm btn-primary">Tambah Jadwal</button>
+                <form th:action="@{/jadwal/tambah/}+${dokter.nip}">
+                    <button class="btn btn-sm btn-primary">Tambah Jadwal</button>
+                </form>
                 <form th:action="@{/dokter/update/}+${dokter.idDokter}">
                     <button class="btn btn-sm btn-dark">Ubah</button>
                 </form>

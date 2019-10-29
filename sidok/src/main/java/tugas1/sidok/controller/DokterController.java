@@ -16,6 +16,8 @@ import tugas1.sidok.service.PoliService;
 import tugas1.sidok.service.SpesialisasiService;
 
 import java.nio.charset.Charset;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +88,8 @@ public class DokterController {
         Random rnd = new Random();
         char generatedRandom = chars.charAt(rnd.nextInt(2));
         int tahunLahir = LocalDateTime.now().getYear() + 5 ;
-        String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
+        Format date = new SimpleDateFormat("ddMMyy");
+        String tanggalLahir = date.format(dokter.getTanggalLahir());
         String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
 
         newDokter.setNip(nip);
@@ -111,8 +114,8 @@ public class DokterController {
             spesialisasiDokterDb.save(baru);
         }
 
-        model.addAttribute("namaDokter", dokter.getNama());
-        model.addAttribute("nipDokter", dokter.getNip());
+        model.addAttribute("namaDokter", newDokter.getNama());
+        model.addAttribute("nipDokter", newDokter.getNip());
         return "add-dokter";
     }
 

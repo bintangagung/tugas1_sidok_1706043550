@@ -21,6 +21,9 @@
         <p th:text = "'Tanggal Lahir           : ' +${dokter.tanggalLahir}"></p>
         <p th:text = "'Jenis Kelamin           : ' +${dokter.jenisKelamin}"></p>
         <p th:text = "'Spesialis           : '"></p>
+        <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
+            <p th:text="${spesialisasiDokter.spesialisasi.nama}"></p>
+        </div>
         <br>
         <br>
         <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>

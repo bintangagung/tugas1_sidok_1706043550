@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class JadwalServiceImpl implements JadwalService {
+public class JadwalJagaServiceImpl implements JadwalJagaService {
     @Autowired
     private JadwalJagaDb jadwalJagaDb;
 
