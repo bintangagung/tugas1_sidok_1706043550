@@ -3,10 +3,8 @@ package tugas1.sidok.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tugas1.sidok.model.JadwalModel;
-import tugas1.sidok.model.PoliModel;
-import tugas1.sidok.repository.JadwalDb;
-import tugas1.sidok.repository.PoliDb;
+import tugas1.sidok.model.JadwalJagaModel;
+import tugas1.sidok.repository.JadwalJagaDb;
 
 import java.util.List;
 
@@ -14,11 +12,11 @@ import java.util.List;
 @Transactional
 public class JadwalServiceImpl implements JadwalService {
     @Autowired
-    private JadwalDb jadwalDb;
+    private JadwalJagaDb jadwalJagaDb;
 
     @Override
-    public void addJadwal(JadwalModel jadwal) { jadwalDb.save(jadwal); }
+    public void addJadwalJaga(JadwalJagaModel jadwalJaga) { jadwalJagaDb.save(jadwalJaga); }
 
     @Override
-    public List<JadwalModel> getListJadwal() { return jadwalDb.findAll(); }
+    public List<JadwalJagaModel> getListJadwalJaga() { return jadwalJagaDb.findAll(); }
 }

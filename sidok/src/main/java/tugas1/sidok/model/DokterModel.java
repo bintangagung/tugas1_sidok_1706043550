@@ -55,20 +55,11 @@ public class DokterModel implements Serializable {
     @Column(name= "jenisKelamin", nullable = false)
     private String jenisKelamin;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    @JoinTable(
-            name = "spesialisasiDokter",
-            joinColumns = @JoinColumn(name = "idDokter"),
-            inverseJoinColumns = @JoinColumn(name = "idSpesialisasi")
-    )
-
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private List<SpesialisasiModel> listSpesialisasi;
+    @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JadwalJagaModel> listPoli;
 
     @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<DokterTugasDiPoli> listPoli;
-
+    private List<SpesialisasiDokterModel> listSpesialisasi;
 
     public Long getIdDokter() {
         return idDokter;
@@ -126,20 +117,19 @@ public class DokterModel implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    public List<SpesialisasiModel> getListSpesialisasi() {
-        return listSpesialisasi;
-    }
-
-    public void setListSpesialisasi(List<SpesialisasiModel> listSpesialisasi) {
-        this.listSpesialisasi = listSpesialisasi;
-    }
-
-    public List<DokterTugasDiPoli> getListPoli() {
+    public List<JadwalJagaModel> getListPoli() {
         return listPoli;
     }
 
-    public void setListPoli(List<DokterTugasDiPoli> listPoli) {
+    public void setListPoli(List<JadwalJagaModel> listPoli) {
         this.listPoli = listPoli;
     }
 
+    public List<SpesialisasiDokterModel> getListSpesialisasi() {
+        return listSpesialisasi;
+    }
+
+    public void setListSpesialisasi(List<SpesialisasiDokterModel> listSpesialisasi) {
+        this.listSpesialisasi = listSpesialisasi;
+    }
 }

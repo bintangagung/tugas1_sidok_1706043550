@@ -11,5 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface SpesialisasiDb extends JpaRepository<SpesialisasiModel, Long> {
-    List<SpesialisasiModel> findByListDokter(List<DokterModel> listDokter);
+    Optional<SpesialisasiModel> findByIdSpesialisasi(Long idSpesialisasi);
 }

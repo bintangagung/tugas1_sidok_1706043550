@@ -36,9 +36,9 @@
             <td><h5 th:text = ${dokter.nik}></h5></td>
             <td><h5 th:text = ${dokter.jenisKelamin}></h5></td>
             <td >
-                <h5 th:if="${dokter.listSpesialisasi == null}" th:text="-"></h5>
-                <div th:unless="${dokter.listSpesialisasi == null}"th:each = "spesialisasi: ${dokter.listSpesialisasi}">
-                    <h5 th:text="${spesialisasi.nama}"></h5>
+                <h5 th:if="${dokter.listSpesialisasi.size() == 0}" th:text="'-'"></h5>
+                <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
+                    <h5 th:text="${spesialisasiDokter.spesialisasi.nama}"></h5>
                 </div>
             </td>
             <td>

@@ -9,44 +9,35 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <h3> Tambah Dokter</h3>
-<form th:action="@{/dokter/tambah}" class="form-group" th:objects="${dokter}" method="POST">
+<form th:action="@{/dokter/tambah}" class="form-group" method="POST">
 
     <label class="col-sm-1 control-label">Nama</label>
-    <input type="text" class="form-control-sm" name="nama"/> <br>
+    <input type="text" class="form-control-sm" th:field="${dokter.nama}"/> <br>
     <label class="col-sm-1 control-label">NIK</label>
-    <input type="number" class="form-control-sm" name="nik"/> <br>
+    <input type="number" class="form-control-sm" th:field="${dokter.nik}"/> <br>
     <label class="col-sm-1 control-label">Tanggal Lahir</label>
-    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" name="tanggalLahir"/> <br>
+    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" th:field="${dokter.tanggalLahir}"/> <br>
     <label class="col-sm-1 control-label">Tempat Lahir</label>
-    <input type="text" class="form-control-sm" name="tempatLahir"/> <br>
+    <input type="text" class="form-control-sm" th:field="${dokter.tempatLahir}"/> <br>
     <label class="col-sm-1 control-label">Jenis Kelamin</label>
-    <select class="form-control-sm" name="jenisKelamin">
-        <option value="1">Laki-Laki</option>
-        <option value="2">Perempuan</option>
+    <select class="form-control-sm" th:field="${dokter.jenisKelamin}">
+        <option th:value="1">Laki-Laki</option>
+        <option th:value="2">Perempuan</option>
     </select>
     <br>
     <label class="col-sm-1 control-label">Spesialisasi</label>
-    <select class="form-control-sm" name="spesialis">
-        <option>Spesialis Patologi Klinik</option>
-        <option>Spesialis Parasitologi Klinik</option>
-        <option>Spesialis Urologi</option>
-        <option>Spesialis Gizi Klinik</option>
-        <option>Spesialis Anak</option>
-        <option>Spesialis Anestesiologi dan Terapi Intensif</option>
-        <option>Spesialis Bedah</option>
-        <option>Spesialis Bedah Plastik Rekonstruksi dan Estetik</option>
-        <option>Spesialis Farmakologi Klinik</option>
-        <option>Spesialis Jantung dan Pembuluh Darah</option>
-        <option>Spesialis Konservasi Gigi</option>
-        <option>Spesialis Bedah Orthopaedi dan Traumatologi</option>
-        <option>Spesialis Penyakit Dalam</option>
-        <option>Spesialis Saraf</option>
-        <option>Spesialis Radiologi</option>
-    </select>
+    <div th:each="spesialisasiDokter, iterationStatus: ${dokter.listSpesialisasi}">
+        <select class="form-control-sm" th:field="${dokter.listSpesialisasi[__${iterationStatus.index}__].spesialisasi.idSpesialisasi}">
+            <option th:each="spesialisasi, iStat : ${listSpesialisasi}"
+                    th:value="${spesialisasi.idSpesialisasi}"
+                    th:text="${spesialisasi.nama}"></option>
+        </select>
+    </div>
     <th><button type="submit" name="tambahSpesialisasi" class="btn-outline-primary">Tambah</button></th> <br>
-    <input type="hidden" name="nip" value="masih kosong"/> <br>
 
-    <button type="submit" class="btn-sm btn-primary"> Submit </button>
+    <input type="hidden" th:field="${dokter.nip}" value="masih kosong"/> <br>
+
+    <button type="submit" name="submitDokter" class="btn-sm btn-primary"> Submit </button>
 </form>
 </body>
 <nav th:replace="fragments/fragment :: footer"></nav>

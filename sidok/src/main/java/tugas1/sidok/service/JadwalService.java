@@ -1,13 +1,13 @@
 package tugas1.sidok.service;
 
-import tugas1.sidok.model.JadwalModel;
+import tugas1.sidok.model.JadwalJagaModel;
 
 import java.util.List;
 
 public interface JadwalService {
     // Method untuk menambah Jadwal
-    void addJadwal(JadwalModel jadwal);
+    void addJadwalJaga(JadwalJagaModel jadwalJaga);
 
     // Method untuk mendapatkan semua jadwal yang tersimpan
-    List<JadwalModel> getListJadwal();
+    List<JadwalJagaModel> getListJadwalJaga();
 }

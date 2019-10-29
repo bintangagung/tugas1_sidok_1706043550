@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import tugas1.sidok.model.DokterModel;
 import tugas1.sidok.model.PoliModel;
 import tugas1.sidok.service.DokterService;
+import tugas1.sidok.service.JadwalService;
 import tugas1.sidok.service.PoliService;
 import tugas1.sidok.service.SpesialisasiService;
 
@@ -27,6 +28,9 @@ public class PoliController {
 
     @Autowired
     private SpesialisasiService spesialisasiService;
+
+    @Autowired
+    private JadwalService jadwalService;
 
     @RequestMapping(value = "/poli")
     public String poli(Model model) {

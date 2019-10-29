@@ -25,7 +25,7 @@ public class PoliModel implements Serializable {
     private String lokasi;
 
     @OneToMany(mappedBy = "poli", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<DokterTugasDiPoli> listDokter;
+    private List<JadwalJagaModel> listDokter;
 
     public Long getIdPoli() {
         return idPoli;
@@ -51,11 +51,11 @@ public class PoliModel implements Serializable {
         this.lokasi = lokasi;
     }
 
-    public List<DokterTugasDiPoli> getListDokter() {
+    public List<JadwalJagaModel> getListDokter() {
         return listDokter;
     }
 
-    public void setListDokter(List<DokterTugasDiPoli> listDokter) {
+    public void setListDokter(List<JadwalJagaModel> listDokter) {
         this.listDokter = listDokter;
     }
 }

@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import tugas1.sidok.model.DokterModel;
+import tugas1.sidok.model.SpesialisasiDokterModel;
 import tugas1.sidok.model.SpesialisasiModel;
+import tugas1.sidok.repository.SpesialisasiDokterDb;
 import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.PoliService;
 import tugas1.sidok.service.SpesialisasiService;
@@ -30,6 +33,9 @@ public class DokterController {
     @Autowired
     private SpesialisasiService spesialisasiService;
 
+    @Autowired
+    private SpesialisasiDokterDb spesialisasiDokterDb;
+
     @RequestMapping(value = "/")
     public String beranda(Model model) {
         System.out.println ("masuk home");
@@ -45,32 +51,66 @@ public class DokterController {
         System.out.println ("masuk form dokter");
         // Membuat objek DokterModel
         DokterModel newDokter = new DokterModel();
+        SpesialisasiDokterModel spesialisasiDokter = new SpesialisasiDokterModel();
+        List<SpesialisasiDokterModel> listSpesialisasiDokter = new ArrayList<>();
+        listSpesialisasiDokter.add(spesialisasiDokter);
+        newDokter.setListSpesialisasi(listSpesialisasiDokter);
+        List<SpesialisasiModel> listSpesialisasi = spesialisasiService.getAll();
+
+        model.addAttribute("listSpesialisasi",listSpesialisasi);
         model.addAttribute("dokter", newDokter);
         // Return view template
         return "form-add-dokter";
     }
 
+    @RequestMapping(value = "/dokter/tambah", method = RequestMethod.POST, params = "tambahSpesialisasi")
+    public String addRowSpesialisasiDokter(@ModelAttribute DokterModel dokter,
+                                           BindingResult bindingResult, Model model) {
+        if(dokter.getListSpesialisasi() == null) {
+            dokter.setListSpesialisasi(new ArrayList<SpesialisasiDokterModel>());
+        }
+        dokter.getListSpesialisasi().add(new SpesialisasiDokterModel());
+        List<SpesialisasiModel> listSpesialisasi = spesialisasiService.getAll();
+
+        model.addAttribute("listSpesialisasi",listSpesialisasi);
+        model.addAttribute("dokter", dokter);
+        // Return view template
+        return "form-add-dokter";
+    }
+
     // URL mapping yang digunakan untuk submit form yang telah anda masukkan pada halaman add dokter
-    @RequestMapping(value = "/dokter/tambah", method = RequestMethod.POST)
+    @RequestMapping(value = "/dokter/tambah", method = RequestMethod.POST, params = "submitDokter")
     public String addDokterSubmit(@ModelAttribute DokterModel dokter, Model model) {
+        DokterModel newDokter = new DokterModel();
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Random rnd = new Random();
         char generatedRandom = chars.charAt(rnd.nextInt(2));
         int tahunLahir = LocalDateTime.now().getYear() + 5 ;
         String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
-
         String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
-        dokter.setNip(nip);
 
-        if (dokter.getJenisKelamin().equals("1")) dokter.setJenisKelamin("Laki-Laki");
-        if (dokter.getJenisKelamin().equals("2")) dokter.setJenisKelamin("Perempuan");
-        dokterService.addDokter(dokter);
+        newDokter.setNip(nip);
+        newDokter.setNama(dokter.getNama());
+        newDokter.setJenisKelamin(dokter.getJenisKelamin());
+        newDokter.setNik(dokter.getNik());
+        newDokter.setTanggalLahir(dokter.getTanggalLahir());
+        newDokter.setTempatLahir(dokter.getTempatLahir());
 
+        if (dokter.getJenisKelamin().equals("1")) newDokter.setJenisKelamin("Laki-Laki");
+        if (dokter.getJenisKelamin().equals("2")) newDokter.setJenisKelamin("Perempuan");
+
+        List<SpesialisasiDokterModel> spesialisasiDokterList = dokter.getListSpesialisasi();
+        dokter.setListSpesialisasi(null);
+        dokterService.addDokter(newDokter);
         System.out.println ("berhasil add dokter");
-        System.out.println (dokter.getJenisKelamin());
-        System.out.println (dokter.getNip());
-        System.out.println (dokter.getNik());
-        System.out.println ("berhasil add dokter");
+
+        for (SpesialisasiDokterModel spesialisasiDokter: spesialisasiDokterList) {
+            SpesialisasiDokterModel baru = new SpesialisasiDokterModel();
+            baru.setDokter(newDokter);
+            baru.setSpesialisasi(spesialisasiService.getByIdSpesialisasi(spesialisasiDokter.getSpesialisasi().getIdSpesialisasi()).get());
+            spesialisasiDokterDb.save(baru);
+        }
+
         model.addAttribute("namaDokter", dokter.getNama());
         model.addAttribute("nipDokter", dokter.getNip());
         return "add-dokter";
@@ -82,13 +122,10 @@ public class DokterController {
             // Request Parameter untuk dipass
             @RequestParam(value = "nikDokter") String nik, Model model
     ) {
-        List<DokterModel> listDokter = new ArrayList<DokterModel>();
-
         // Mengambil objek DokterModel yang dituju
         DokterModel dokter = dokterService.getDokterByNikDokter(nik).get();
 
-        listDokter.add(dokter);
-        List<SpesialisasiModel> spesialisList = spesialisasiService.findAllSpesialisasiByIdDokter(listDokter);
+        List<SpesialisasiDokterModel> spesialisList = spesialisasiDokterDb.findAllByDokterIdDokter(dokter.getIdDokter());
         dokter.setListSpesialisasi(spesialisList);
 
         // Add model dokter ke "dokter" untuk dirender

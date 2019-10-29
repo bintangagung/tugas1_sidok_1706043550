@@ -11,15 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class SpesialisasiServiceImpl implements SpesialisasiService {
     @Autowired
     private SpesialisasiDb spesialisasiDb;
 
     @Override
-    public List<SpesialisasiModel> findAllSpesialisasiByIdDokter(List<DokterModel> list) {
-        return spesialisasiDb.findByListDokter(list);
+    public List<SpesialisasiModel> getAll() {
+        return spesialisasiDb.findAll();
     }
 
-
+    @Override
+    public Optional<SpesialisasiModel> getByIdSpesialisasi(Long idSpesialisasi) {
+        return spesialisasiDb.findByIdSpesialisasi(idSpesialisasi);
+    }
 }
