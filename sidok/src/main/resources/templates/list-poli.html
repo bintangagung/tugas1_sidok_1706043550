@@ -29,8 +29,12 @@
             <td><h4 th:text = ${poli.nama}></h4></td>
             <td><h4 th:text = ${poli.lokasi}></h4></td>
             <td>
-                <button type="submit" name="changePoli" class="btn btn-sm btn-dark">Ubah</button>
-                <button type="submit" name="removePoli" class="btn btn-sm btn-danger">hapus</button>
+                <form th:action="@{/poli/update/}+${poli.idPoli}">
+                    <button class="btn btn-sm btn-dark">Ubah</button>
+                </form>
+                <form th:action="@{/poli/delete/}+${poli.idPoli}">
+                    <button class="btn btn-sm btn-danger">hapus</button>
+                </form>
             </td>
         </tr>
         </tbody>

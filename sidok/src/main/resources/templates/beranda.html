@@ -46,7 +46,9 @@
                 <form th:action="@{/dokter/update/}+${dokter.idDokter}">
                     <button class="btn btn-sm btn-dark">Ubah</button>
                 </form>
-                <button type="submit" name="removeDokter" class="btn btn-sm btn-danger">hapus</button>
+                <form th:action="@{/dokter/delete/}+${dokter.idDokter}">
+                    <button class="btn btn-sm btn-danger">hapus</button>
+                </form>
             </td>
         </tr>
         </tbody>

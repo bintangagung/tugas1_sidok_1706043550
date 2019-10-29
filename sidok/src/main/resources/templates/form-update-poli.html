@@ -2,20 +2,22 @@
 <html xmlns:th="http://www.thymelaf.org">
 <head>
     <meta charset="UTF-8">
-    <title> Add Poli </title>
+    <title> Update Poli </title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<h3> Tambah Poli</h3>
-<form th:action="@{/poli/tambah}" class="form-group" th:objects="${poli}" method="POST">
+<h3> Ubah Poli</h3>
+<form th:action="@{/poli/update/{idPoli}(idPoli=${poli.idPoli})}" class="form-group" th:objects="${poli}" method="POST">
+    <input type="hidden" th:field="${poli.idPoli}" />
 
     <label class="col-sm-1 control-label">Nama</label>
-    <input type="text" class="form-control-sm" name="nama"/> <br>
+    <input type="text" class="form-control-sm" name="nama" th:field="${poli.nama}"/> <br>
     <label class="col-sm-1 control-label">Lokasi</label>
-    <input type="text" class="form-control-sm" name="lokasi"/> <br>
+    <input type="text" class="form-control-sm" name="lokasi" th:field="${poli.lokasi}"/> <br>
     <br>
+
     <button type="submit" class="btn-sm btn-primary"> Submit </button>
 </form>
 </body>
