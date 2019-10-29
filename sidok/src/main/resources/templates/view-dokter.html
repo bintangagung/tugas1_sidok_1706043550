@@ -13,14 +13,14 @@
 <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
+        <br>
         <h3 class="badge-light text-lg-center"> Detail Dokter </h3>
-        <p class="col-sm-1 control-label">Nama</p> <p th:text = ${dokter.nama}></p>
-        <p class="col-sm-1 control-label">NIP</p> <p th:text = ${dokter.nip}></p>
-        <p class="col-sm-1 control-label">NIK</p> <p th:text = ${dokter.nik}></p>
-        <p class="col-sm-1 control-label">Tempat Lahir</p> <p th:text = ${dokter.tempatLahir}></p>
-        <p class="col-sm-1 control-label">Tanggal Lahir</p> <p th:text = ${dokter.tanggalLahir}></p>
-        <p class="col-sm-1 control-label">Jenis Kelamin</p> <p th:text = ${dokter.jenisKelamin}></p>
-        <p class="col-sm-1 control-label">Spesialisasi</p>
+        <p th:text = "'Nama           : ' +${dokter.nama}"></p>
+        <p th:text = "'Nik           : ' +${dokter.nik}"></p>
+        <p th:text = "'Tempat Lahir           : ' +${dokter.tempatLahir}"></p>
+        <p th:text = "'Tanggal Lahir           : ' +${dokter.tanggalLahir}"></p>
+        <p th:text = "'Jenis Kelamin           : ' +${dokter.jenisKelamin}"></p>
+        <p th:text = "'Spesialis           : '"></p>
         <br>
         <br>
         <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>

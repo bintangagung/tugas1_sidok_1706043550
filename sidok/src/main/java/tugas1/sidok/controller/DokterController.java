@@ -14,6 +14,7 @@ import tugas1.sidok.service.SpesialisasiService;
 
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,8 +24,8 @@ public class DokterController {
     @Autowired
     private DokterService dokterService;
 
-//    @Autowired
-//    private PoliService poliService;
+    @Autowired
+    private PoliService poliService;
 
     @Autowired
     private SpesialisasiService spesialisasiService;
@@ -76,17 +77,19 @@ public class DokterController {
     }
 
     // URL mapping view
-    @RequestMapping(path = "/dokter", method = RequestMethod.GET)
+    @RequestMapping(path = "/dokter", method = RequestMethod.GET, params = "nikDokter")
     public String view(
             // Request Parameter untuk dipass
-            @RequestParam(value = "nik") String nik, Model model
+            @RequestParam(value = "nikDokter") String nik, Model model
     ) {
+        List<DokterModel> listDokter = new ArrayList<DokterModel>();
 
         // Mengambil objek DokterModel yang dituju
         DokterModel dokter = dokterService.getDokterByNikDokter(nik).get();
 
-//        List<SpesialisasiModel> spesialisList = SpesialisasiService.getListSpesialisasi(dokter.getNik());
-//        dokter.setListSpesialisasi(spesialisList);
+        listDokter.add(dokter);
+        List<SpesialisasiModel> spesialisList = spesialisasiService.findAllSpesialisasiByIdDokter(listDokter);
+        dokter.setListSpesialisasi(spesialisList);
 
         // Add model dokter ke "dokter" untuk dirender
         model.addAttribute("dokter", dokter);
@@ -99,9 +102,10 @@ public class DokterController {
     @RequestMapping(value = "dokter/update/{idDokter}", method = RequestMethod.GET)
     public String changeDokterFormPage(@PathVariable Long idDokter, Model model) {
         //mengambil existing data dokter
+        System.out.println ("berhasil masuk update");
         DokterModel existingDokter = dokterService.getDokterByIdDokter(idDokter).get();
         model.addAttribute("dokter", existingDokter);
-
+        System.out.println ("akan render update");
         return "form-update-dokter";
     }
 

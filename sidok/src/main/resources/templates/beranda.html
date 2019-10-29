@@ -28,20 +28,24 @@
         </thead>
         <tbody>
         <tr th:each="dokter, iterationStatus: ${listDokter}">
-            <td><h4 th:text = ${iterationStatus.count}></h4></td>
-            <td><h4 th:text = ${dokter.nama}></h4></td>
-            <td><h4 th:text = ${dokter.nip}></h4></td>
-            <td><h4 th:text = ${dokter.nik}></h4></td>
-            <td><h4 th:text = ${dokter.jenisKelamin}></h4></td>
+            <td><h5 th:text = ${iterationStatus.count}></h5></td>
+
+            <td><h5><a th:text = ${dokter.nama} th:href="@{/dokter?nikDokter=}+${dokter.nik}"></a></h5></td>
+
+            <td><h5 th:text = ${dokter.nip}></h5></td>
+            <td><h5 th:text = ${dokter.nik}></h5></td>
+            <td><h5 th:text = ${dokter.jenisKelamin}></h5></td>
             <td >
-                <h4 th:if="${dokter.listSpesialisasi == null}" th:text="-"></h4>
+                <h5 th:if="${dokter.listSpesialisasi == null}" th:text="-"></h5>
                 <div th:unless="${dokter.listSpesialisasi == null}"th:each = "spesialisasi: ${dokter.listSpesialisasi}">
-                    <h4 th:text="${spesialisasi.nama}"></h4>
+                    <h5 th:text="${spesialisasi.nama}"></h5>
                 </div>
             </td>
             <td>
                 <button type="submit" name="addJadwal" class="btn btn-sm btn-primary">Tambah Jadwal</button>
-                <button type="submit" name="changeJadwal" class="btn btn-sm btn-dark">Ubah</button>
+                <form th:action="@{/dokter/update/}+${dokter.idDokter}">
+                    <button class="btn btn-sm btn-dark">Ubah</button>
+                </form>
                 <button type="submit" name="removeDokter" class="btn btn-sm btn-danger">hapus</button>
             </td>
         </tr>

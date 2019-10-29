@@ -21,11 +21,12 @@ import java.util.Random;
 @Controller
 public class PoliController {
     @Qualifier("poliServiceImpl")
-    @Autowired
-    private DokterService dokterService;
 
     @Autowired
     private PoliService poliService;
+
+    @Autowired
+    private DokterService dokterService;
 
     @Autowired
     private SpesialisasiService spesialisasiService;

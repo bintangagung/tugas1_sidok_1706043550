@@ -13,15 +13,15 @@
     <input type="hidden" th:field="${dokter.idDokter}" />
 
     <label class="col-sm-1 control-label">Nama</label>
-    <input type="text" class="form-control-sm" name="nama" value="${dokter.nama}"/> <br>
+    <input type="text" class="form-control-sm" name="nama" th:field="${dokter.nama}"/> <br>
     <label class="col-sm-1 control-label">NIK</label>
-    <input type="number" class="form-control-sm" name="nik" value="${dokter.nik}"/> <br>
+    <input type="number" class="form-control-sm" name="nik" th:field="${dokter.nik}"/> <br>
     <label class="col-sm-1 control-label">Tanggal Lahir</label>
-    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" name="tanggalLahir" value="${dokter.tanggalLahir}"/> <br>
+    <input type="date" data-date-format="DDMMYYYY" class="form-control-sm" name="tanggalLahir" th:field="${dokter.tanggalLahir}"/> <br>
     <label class="col-sm-1 control-label">Tempat Lahir</label>
-    <input type="text" class="form-control-sm" name="tempatLahir" value="${dokter.tempatLahir}"/> <br>
+    <input type="text" class="form-control-sm" name="tempatLahir" th:field="${dokter.tempatLahir}"/> <br>
     <label class="col-sm-1 control-label">Jenis Kelamin</label>
-    <select class="form-control-sm" name="jenisKelamin" value="${dokter.jenisKelamin}">
+    <select class="form-control-sm" name="jenisKelamin" th:field="${dokter.jenisKelamin}">
         <option value="1">Laki-Laki</option>
         <option value="2">Perempuan</option>
     </select>
