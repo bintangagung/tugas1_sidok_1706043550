@@ -26,7 +26,7 @@
         <tbody>
         <tr th:each="poli, iterationStatus: ${listPoli}">
             <td><h4 th:text = ${iterationStatus.count}></h4></td>
-            <td><h4 th:text = ${poli.nama}></h4></td>
+            <td><h4><a th:text = ${poli.nama} th:href="@{/poli/dokter?idPoli=}+${poli.idPoli}"></a></h4></td>
             <td><h4 th:text = ${poli.lokasi}></h4></td>
             <td>
                 <form th:action="@{/poli/update/}+${poli.idPoli}">

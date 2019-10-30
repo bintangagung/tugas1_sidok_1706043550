@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tugas1.sidok.model.DokterModel;
+import tugas1.sidok.model.JadwalJagaModel;
 import tugas1.sidok.model.PoliModel;
+import tugas1.sidok.model.SpesialisasiDokterModel;
+import tugas1.sidok.repository.JadwalJagaDb;
 import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.JadwalJagaService;
 import tugas1.sidok.service.PoliService;
@@ -31,6 +34,9 @@ public class PoliController {
 
     @Autowired
     private JadwalJagaService jadwalService;
+
+//    @Autowired
+//    private JadwalJagaDb jadwalJagaDb;
 
     @RequestMapping(value = "/poli")
     public String poli(Model model) {
@@ -58,26 +64,6 @@ public class PoliController {
         model.addAttribute("lokasiPoli", poli.getLokasi());
         return "add-poli";
     }
-
-    // URL mapping view
-//    @RequestMapping(path = "/poli/view", method = RequestMethod.GET)
-//    public String view(
-//            // Request Parameter untuk dipass
-//            @RequestParam(value = "idPoli") Long idPoli, Model model
-//    ) {
-//
-//        // Mengambil objek PoliModel yang dituju
-//        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
-//
-////        List<PoliModel> poliList = PoliService.getListPoli(poli.getIdPoli());
-////        poli.setListPoli(poliList);
-//
-//        // Add model poli ke "poli" untuk dirender
-//        model.addAttribute("poli", poli);
-//
-//        // return view template
-//        return "view-poli";
-//    }
 
     //API yang digunakan untuk menuju halaman form update poli
     @RequestMapping(value = "poli/update/{idPoli}", method = RequestMethod.GET)
@@ -110,5 +96,23 @@ public class PoliController {
         model.addAttribute("lokasiPoli", poli.getLokasi());
         return "delete-poli";
     }
+
+    @RequestMapping(path = "/poli/dokter", method = RequestMethod.GET, params = "idPoli")
+    public String view(
+            // Request Parameter untuk dipass
+            @RequestParam(value = "idPoli") Long idPoli, Model model
+    ) {
+        // Mengambil objek DokterModel yang dituju
+        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
+
+        List<JadwalJagaModel> dokterList = poli.getListDokter();
+
+        model.addAttribute("poli", poli);
+        model.addAttribute("dokterList", dokterList);
+
+        // return view template
+        return "view-poli";
+    }
+
 
 }
