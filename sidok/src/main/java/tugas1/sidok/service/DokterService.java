@@ -18,6 +18,8 @@ public interface DokterService {
     // Method untuk mendapatkan data sebuah Dokter berdasarkan idDokter
     Optional<DokterModel> getDokterByNikDokter(String nik);
 
+    Optional<DokterModel> getDokterByNipDokter(String nip);
+
     DokterModel changeDokter(DokterModel dokterModel);
 
     void deleteDokter(DokterModel Dokter);

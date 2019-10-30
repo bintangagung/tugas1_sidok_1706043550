@@ -31,10 +31,10 @@ public class DokterServiceImpl implements DokterService {
         return dokterDb.findByNik(nik);
     }
 
-//    @Override
-//    public Optional<DokterModel> getDokterByNip(String nip) {
-//        return dokterDb.findByNip(nip);
-//    }
+    @Override
+    public Optional<DokterModel> getDokterByNipDokter(String nip) {
+        return dokterDb.findByNip(nip);
+    }
 
     @Override
     public DokterModel changeDokter(DokterModel dokterModel) {

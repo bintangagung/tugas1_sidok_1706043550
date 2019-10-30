@@ -8,45 +8,57 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import tugas1.sidok.model.DokterModel;
+import tugas1.sidok.model.*;
+import tugas1.sidok.repository.JadwalJagaDb;
 import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.JadwalJagaService;
+import tugas1.sidok.service.JadwalJagaServiceImpl;
+import tugas1.sidok.service.PoliService;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Controller
 public class JadwalJagaController {
 
     @Autowired
-    private JadwalJagaService jadwalJagaService;
+    private DokterService dokterService;
 
-    @RequestMapping(value = "jadwal/tambah/{nip}", method = RequestMethod.GET)
+    @Autowired
+    private PoliService poliService;
+
+    @Autowired
+    private JadwalJagaDb   jadwalJagaDb;
+
+    @RequestMapping(value = "/jadwal/tambah/{nip}", method = RequestMethod.GET)
     public String addJadwalDokterFormPage(@PathVariable String nip, Model model) {
-        DokterModel existingDokter = dokterService.getDokterByIdDokter(idDokter).get();
-        model.addAttribute("dokter", existingDokter);
+        JadwalJagaModel jadwalJaga = new JadwalJagaModel();
+        DokterModel dokter = dokterService.getDokterByNipDokter(nip).get();
+        List<PoliModel> listPoli = poliService.getListPoli();
 
-        return "form-update-dokter";
+        model.addAttribute("listPoli",listPoli);
+        model.addAttribute("dokter", dokter);
+        model.addAttribute("jadwalJaga",jadwalJaga);
+        // Return view template
+        return "form-add-jadwal";
     }
 
-
-    //API yang digunakan untuk submit form update dokter
-    @RequestMapping(value = "dokter/update/{idDokter}", method = RequestMethod.POST)
-    public String changeDokterFormSubmit(@PathVariable Long idDokter, @ModelAttribute DokterModel dokter, Model model) {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        Random rnd = new Random();
-        char generatedRandom = chars.charAt(rnd.nextInt(2));
-        int tahunLahir = LocalDateTime.now().getYear() + 5 ;
-        String tanggalLahir = String.valueOf(dokter.getTanggalLahir().getDate()) + String.valueOf(dokter.getTanggalLahir().getMonth()) + String.valueOf(dokter.getTanggalLahir().getYear());
-        String nip = String.valueOf(tahunLahir) + tanggalLahir + dokter.getJenisKelamin() + generatedRandom;
-        dokter.setNip(nip);
-        if (dokter.getJenisKelamin().equals("1")) dokter.setJenisKelamin("Laki-Laki");
-        if (dokter.getJenisKelamin().equals("2")) dokter.setJenisKelamin("Perempuan");
-        DokterModel newDokterData = dokterService.changeDokter(dokter);
-
-        model.addAttribute("namaDokter", newDokterData.getNama());
-        model.addAttribute("nipDokter", newDokterData.getNip());
-        return "update-dokter";
+    @RequestMapping(value = "/jadwal/tambah/{nip}", method = RequestMethod.POST)
+    public String addJadwalFormSubmit(@PathVariable String nip, @ModelAttribute JadwalJagaModel newJadwal, Model model) {
+        DokterModel dokter = dokterService.getDokterByNipDokter(nip).get();
+        newJadwal.setDokter(dokter);
+        newJadwal.setPoli(poliService.getPoliByIdPoli(newJadwal.getPoli().getIdPoli()).get());
+        jadwalJagaDb.save(newJadwal);
+        JadwalJagaModel jadwalJaga = new JadwalJagaModel();
+        List<PoliModel> listPoli = poliService.getListPoli();
+        model.addAttribute("dokter",dokter);
+        model.addAttribute("listPoli",listPoli);
+        model.addAttribute("jadwalJaga",jadwalJaga);
+        return "form-add-jadwal";
     }
 
 }
