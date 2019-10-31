@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Jadwal </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h2 style="text-align:center;"> Tambah Jadwal Jaga Poli Seorang Dokter </h2>
+
+            <form th:action="@{/jadwal/tambah/}+${dokter.nip}" class="form-group" th:objects="${jadwalJaga}" method="POST">
+                <label class="col-sm-1 control-label">Dokter</label>
+                <label class="col-sm-1 control-label" th:text="${dokter.nama}"></label>
+                <br>
+                <label class="col-sm-1 control-label">Poli</label>
+                <select class="form-control-sm" th:field = ${jadwalJaga.poli.idPoli}>
+                <option th:each="poli, iterationStatus : ${listPoli}"
+                        th:value="${poli.idPoli}"
+                        th:text="${poli.nama}"></option>
+                </select> <br>
+                <label class="col-sm-1 control-label">Hari</label>
+                <select class="form-control-sm" th:field = "${jadwalJaga.hari}">
+                    <option th:value="'Senin'" th:text="'Senin'"></option>
+                    <option th:value="'Selasa'" th:text="'Selasa'"></option>
+                    <option th:value="'Rabu'" th:text="'Rabu'"></option>
+                    <option th:value="'Kamis'" th:text="'Kamis'"></option>
+                    <option th:value="'Jumat'" th:text="'Jumat'"></option>
+                    <option th:value="'Sabtu'" th:text="'Sabtu'"></option>
+                    <option th:value="'Minggu'" th:text="'Minggu'"></option>
+                </select> <br>
+                <br>
+                <button type="submit" class="btn-sm btn-primary"> Submit </button>
+            </form>
+
+            <h3 class="badge-light text-lg-left"> Daftar Poli </h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Hari</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="jadwal, iterationStatus: ${dokter.listPoli}">
+                    <td><h5 th:text = ${iterationStatus.count}></h5></td>
+                    <td><h5 th:text = ${jadwal.poli.nama}></h5></td>
+                    <td><h5 th:text = ${jadwal.hari}></h5></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>

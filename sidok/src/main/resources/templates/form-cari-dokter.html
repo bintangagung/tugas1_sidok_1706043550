@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Home </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-fluid">
+    <h4 style="text-align:left;"> Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu </h4>
+    <form th:action="@{/cari}" class="form-group" method="GET">
+        <label class="col-sm-1 control-label">Spesialisasi</label>
+        <select class="form-control-sm" name="idSpesialisasi">
+            <option th:each="spesialisasi, iterationStatus : ${listSpesialisasi}"
+                    th:value="${spesialisasi.idSpesialisasi}"
+                    th:text="${spesialisasi.nama}"></option>
+        </select> <br>
+        <label class="col-sm-1 control-label">Poli</label>
+        <select class="form-control-sm" name="idPoli">
+            <option th:each="poli, iterationStatus : ${listPoli}"
+                    th:value="${poli.idPoli}"
+                    th:text="${poli.nama}"></option>
+        </select> <br>
+        <button type="submit" class="btn-sm btn-primary" name="submit"> Submit </button>
+    </form>
+<!--    <div th:if = "${}">-->
+
+    </div>
+<!--    <h3 class="badge-light text-lg-left" th:text = "'Daftar Dokter Poli ' +${poli.nama}+ ' dengan spesialisasi ' +${spesialisasi.nama}"></h3>-->
+    <h3 class="badge-light text-lg-left" th:text = "'Daftar Dokter Poli dengan spesialisasi '"></h3>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>NIP</th>
+            <th>NIK</th>
+            <th>Jenis Kelamin</th>
+            <th>Spesialisasi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dokter, iterationStatus: ${listDokter}">
+            <td><h6 th:text = ${iterationStatus.count}></h6></td>
+            <td><h6 th:text = ${dokter.nama}></h6></td>
+            <td><h6 th:text = ${dokter.nip}></h6></td>
+            <td><h6 th:text = ${dokter.nik}></h6></td>
+            <td><h6 th:text = ${dokter.jenisKelamin}></h6></td>
+            <td><div th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
+                <h7 th:text="${spesialisasiDokter.spesialisasi .nama}"></h7>
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+</html>

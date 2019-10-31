@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> View Poli </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="row" style="margin-top: 30px">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
+        <h4 class="badge-light text-lg-left" th:text = "'Daftar Dokter yang bertugas di '+${poli.nama}"></h4>
+        <table class="table table-striped">
+            <thead>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Spesialisasi</th>
+            </thead>
+        <tbody>
+        <tr th:each="dokter, iterationStatus: ${dokterList}">
+            <td><h6 th:text = ${iterationStatus.count}></h6></td>
+            <td><h6 th:text = ${dokter.dokter.nama}></h6></td>
+            <td><h7 th:each="spesialisasi : ${dokter.dokter.listSpesialisasi}" th:text="${spesialisasi.spesialisasi.nama}"></h7></td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+    <div class="col-sm-3"></div>
+</div>
+
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>
