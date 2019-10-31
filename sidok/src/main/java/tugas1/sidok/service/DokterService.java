@@ -24,6 +24,4 @@ public interface DokterService {
 
     void deleteDokter(DokterModel Dokter);
 
-    //viewAll
-    List<DokterModel> getDokterListOrderByNama();
 }

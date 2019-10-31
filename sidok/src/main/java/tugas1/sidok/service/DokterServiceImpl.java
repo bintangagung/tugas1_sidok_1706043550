@@ -56,10 +56,6 @@ public class DokterServiceImpl implements DokterService {
 
     @Override
     public void deleteDokter(DokterModel dokter) { dokterDb.delete(dokter); }
-
-    @Override
-    public List<DokterModel> getDokterListOrderByNama() {
-        return dokterDb.findAll();
-    }
+    
 
 }

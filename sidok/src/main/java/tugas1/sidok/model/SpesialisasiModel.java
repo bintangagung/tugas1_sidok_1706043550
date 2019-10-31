@@ -9,9 +9,6 @@ import java.util.List;
 @Entity
 @Table(name="spesialisasi")
 public class SpesialisasiModel implements Serializable {
-//    id, nama, dan gelar.
-//    Suatu gelar dapat dimiliki oleh 0 hingga N dokter.
-//    Setiap dokter juga dapat memiliki beberapa spesialisasi.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSpesialisasi;

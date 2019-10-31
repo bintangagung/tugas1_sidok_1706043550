@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name="poli")
 public class PoliModel implements Serializable {
-//    id, nama poli, dan lokasi. Suatu poli dapat memiliki banyak dokter.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPoli;

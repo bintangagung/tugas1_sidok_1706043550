@@ -1,6 +1,5 @@
 package tugas1.sidok.service;
 
-import tugas1.sidok.model.DokterModel;
 import tugas1.sidok.model.SpesialisasiModel;
 
 import java.util.List;

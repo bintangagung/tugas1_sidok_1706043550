@@ -1,9 +1,5 @@
 package tugas1.sidok.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,9 +13,6 @@ import java.util.List;
 @Entity
 @Table(name="dokter")
 public class DokterModel implements Serializable {
-//    id, NIK, nama, jenis kelamin, tanggal lahir, dan tempat lahir.
-//    Dokter dapat memiliki 0 sampai N spesialisasi.
-//    Dokter juga dapat bertugas di banyak poli.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDokter;
