@@ -23,18 +23,23 @@
                             th:value="${poli.idPoli}"
                             th:text="${poli.nama}"></option>
                 </select> <br>
-                <button type="submit" class="btn-sm btn-primary" name="submit"> Submit </button>
+                <button type="submit" class="btn-sm btn-primary"> Submit </button>
             </form>
-
-            <h3 class="badge-light text-lg-center"> Detail Dokter </h3>
-            <p th:text = "'Nama           : ' +${dokter.nama}"></p>
-            <p th:text = "'Nik           : ' +${dokter.nik}"></p>
-            <p th:text = "'Tempat Lahir           : ' +${dokter.tempatLahir}"></p>
-            <p th:text = "'Tanggal Lahir           : ' +${dokter.tanggalLahir}"></p>
-            <p th:text = "'Jenis Kelamin           : ' +${dokter.jenisKelamin}"></p>
-            <p th:text = "'Spesialis           : '"></p>
-            <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
-                <p th:text="${spesialisasiDokter.spesialisasi.nama}"></p>
+            <div class="card">
+                <div class="card-header">Detail Dokter</div>
+                <div class="card-body">
+                    <div th:each="dokter : ${listDokter}">
+                        <p th:text = "'Nama           : ' +${dokter.nama}"></p>
+                        <p th:text = "'Nik           : ' +${dokter.nik}"></p>
+                        <p th:text = "'Tempat Lahir           : ' +${dokter.tempatLahir}"></p>
+                        <p th:text = "'Tanggal Lahir           : ' +${dokter.tanggalLahir}"></p>
+                        <p th:text = "'Jenis Kelamin           : ' +${dokter.jenisKelamin}"></p>
+                        <p th:text = "'Spesialis           : '"></p>
+                        <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
+                            <p th:text="${spesialisasiDokter.spesialisasi.nama}"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4"></div>

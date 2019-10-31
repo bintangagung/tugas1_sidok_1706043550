@@ -18,10 +18,7 @@ import java.nio.charset.Charset;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 public class DokterController {
@@ -226,34 +223,41 @@ public class DokterController {
         return "form-cari-dokter";
     }
 
-    @RequestMapping(value = "/cari/tugas-terbanyak", method = RequestMethod.GET)
-    public String cariDokterTersibukFormPage(Model model) {
+    @RequestMapping(path = "/cari/tugas-terbanyak", method = RequestMethod.GET)
+    public String cariDokterTersibuk(@RequestParam(value = "idPoli",required = false) Long idPoli, Model model) {
+        List<JadwalJagaModel> listJadwal;
         List<PoliModel> listPoli = poliService.getListPoli();
+        List<DokterModel> listDokter = new ArrayList<>();
+        HashMap<DokterModel,Integer> dokter = new HashMap();
+        if(idPoli != null){
+            listJadwal = jadwalJagaDb.findAllByPoliIdPoli(idPoli);
+            for (JadwalJagaModel jadwalJaga: listJadwal) {
+                if(listDokter.contains(jadwalJaga.getDokter()) == false){
+                    listDokter.add(jadwalJaga.getDokter());
+                    dokter.put(jadwalJaga.getDokter(),1);
+                } else
+                    dokter.put(jadwalJaga.getDokter(),(Integer)dokter.get(jadwalJaga.getDokter())+1);
+            }
+            Integer terbanyak = 0;
+            for (DokterModel dokters: listDokter) {
+                if (dokter.get(dokters)>terbanyak){
+                    terbanyak = dokter.get(dokters);
+                }
+            }
+            List<DokterModel> listDokterTerbanyak = new ArrayList<>();
+            for(DokterModel dokters: listDokter){
+                if(dokter.get(dokters)==terbanyak){
+                    listDokterTerbanyak.add(dokters);
+                }
+            }
+            model.addAttribute("listDokter",listDokterTerbanyak);
+        }
+        else{
+            model.addAttribute("listDokter",listDokter);
+        }
         model.addAttribute("listPoli",listPoli);
-
-        return "form-cari-dokter-tersibuk";
+        return "cari-dokter-tersibuk";
     }
 
-    @RequestMapping(path = "/cari/bertugas-banyak", method = RequestMethod.GET, params = {"submit"})
-    public String cariDokterTersibukFormSubmit(@RequestParam(value = "idPoli",required = false) Long idPoli, Model model) {
-        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
-        List<DokterModel> listDokter = dokterService.getListDokter();
-        DokterModel dokter = listDokter.get(0);
-//        for (DokterModel countDokter : listDokter) {
-//            if()
-//        }
-//        List<DokterModel> listDokter = new ArrayList<>();
-//        for (DokterModel spesialisasiDokter : spesialisasiList) {
-//            if (poliList.contains(spesialisasiDokter)) listDokter.add(spesialisasiDokter);
-//        }
-//
-//        List<PoliModel> poli = poliService.getListPoli();
-//        List<JadwalJagaModel> listPoli = jadwalJagaDb.findAllByPoliIdPoli(idPoli);
-//
-//        System.out.println (listDokter);
-//        model.addAttribute("listPoli", poli);
-//        model.addAttribute("listDokter", listDokter);
-        return "form-cari-dokter";
-    }
 
 }

@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface JadwalJagaDb extends JpaRepository<JadwalJagaModel, Long> {
     List<JadwalJagaModel> findAllByPoliIdPoli(Long idPoli);
-//    List<JadwalJagaModel> findAllByIdDokter(Long idDokter);
+
+    List<JadwalJagaModel> findAllByDokterIdDokter(Long idDokter);
 }
