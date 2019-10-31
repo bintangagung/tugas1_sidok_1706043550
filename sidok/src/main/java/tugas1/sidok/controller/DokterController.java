@@ -262,15 +262,7 @@ public class DokterController {
     @RequestMapping(value = "/jumlah-dokter", method = RequestMethod.GET)
     public String jumlahDokterUntukSetiapSpesialisasiPage(Model model) {
         List<SpesialisasiModel> listSpesialisasi = spesialisasiService.getAll();
-        List<Integer> jumlahDokter = new ArrayList<>();
-
-        for (SpesialisasiModel spesialisasi: listSpesialisasi) {
-            jumlahDokter.add(spesialisasi.getListDokter().size());
-        }
-        System.out.println (listSpesialisasi);
-        System.out.println (jumlahDokter);
         model.addAttribute("listSpesialisasi", listSpesialisasi);
-        model.addAttribute("jumlahDokter", jumlahDokter);
 
         return "jumlah-dokter-di-spesialisasi";
     }

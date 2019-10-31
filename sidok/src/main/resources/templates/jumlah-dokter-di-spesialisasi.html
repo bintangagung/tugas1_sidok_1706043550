@@ -28,7 +28,7 @@
                 <tr th:each="spesialisasi, iterationStatus: ${listSpesialisasi}">
                     <td><h5 th:text = ${iterationStatus.count}></h5></td>
                     <td><h5 th:text = ${spesialisasi.nama}></h5></td>
-                    <td><h5 th:text = ${jumlahSpesialisasi}></h5></td>
+                    <td><h5 th:text = ${spesialisasi.getListDokter().size()}></h5></td>
                 </tr>
                 </tbody>
             </table>
