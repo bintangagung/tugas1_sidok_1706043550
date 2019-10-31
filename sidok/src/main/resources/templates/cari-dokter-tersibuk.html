@@ -18,7 +18,7 @@
             <h5 style="text-align:left;"> Cari Dokter Yang Paling Banyak Bertugas di Poli </h5>
             <br>
             <form th:action="@{/cari/tugas-terbanyak}" class="form-group" method="GET">
-                <label class="col-sm-1 control-label">Poli</label>
+                <label class="col-sm-2 control-label">Poli</label>
                 <select class="form-control-sm" name="idPoli">
                     <option th:each="poli, iterationStatus : ${listPoli}"
                             th:value="${poli.idPoli}"
