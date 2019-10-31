@@ -24,10 +24,11 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Cari
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a th:href="@{/cari}">Spesialisasi dan Poli</a></li>
-                    <li><a th:href="@{/cari/tugas-terbanyak}">Dokter Tersibuk</a></li>
+                    <li><a class="nav-link" th:href="@{/cari}">Spesialisasi dan Poli</a></li>
+                    <li><a class="nav-link" th:href="@{/cari/tugas-terbanyak}">Dokter Tersibuk</a></li>
                 </ul>
             </div>
+            <li class="nav-item"> <a class="nav-link" th:href="@{/jumlah-dokter}">Bonus</a></li>
         </ul>
 </nav>
 </body>
