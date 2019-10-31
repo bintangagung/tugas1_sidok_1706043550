@@ -7,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import tugas1.sidok.model.DokterModel;
-import tugas1.sidok.model.SpesialisasiDokterModel;
-import tugas1.sidok.model.SpesialisasiModel;
+import tugas1.sidok.model.*;
+import tugas1.sidok.repository.JadwalJagaDb;
 import tugas1.sidok.repository.SpesialisasiDokterDb;
 import tugas1.sidok.service.DokterService;
 import tugas1.sidok.service.PoliService;
@@ -21,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Controller
@@ -37,6 +37,9 @@ public class DokterController {
 
     @Autowired
     private SpesialisasiDokterDb spesialisasiDokterDb;
+
+    @Autowired
+    private JadwalJagaDb jadwalJagaDb;
 
     @RequestMapping(value = "/")
     public String beranda(Model model) {
@@ -180,5 +183,49 @@ public class DokterController {
         model.addAttribute("nipDokter", dokter.getNip());
         return "delete-dokter";
     }
+
+
+    @RequestMapping(value = "/cari", method = RequestMethod.GET)
+    public String cariDokterFormPage(Model model) {
+        List<PoliModel> listPoli = poliService.getListPoli();
+        List<SpesialisasiModel> listSpesialisasi = spesialisasiService.getAll();
+
+        model.addAttribute("listSpesialisasi",listSpesialisasi);
+        model.addAttribute("listPoli",listPoli);
+
+        return "form-cari-dokter";
+    }
+
+    @RequestMapping(path = "/cari", method = RequestMethod.GET, params = {"submit"})
+    public String cariDokterFormSubmit(@RequestParam(value = "idSpesialisasi",required = false) Long idSpesialisasi,
+                             @RequestParam(value = "idPoli",required = false) Long idPoli, Model model
+    ) {
+        List<PoliModel> poli = poliService.getListPoli();
+        List<SpesialisasiModel> spesialisasi = spesialisasiService.getAll();
+        List<SpesialisasiDokterModel> listSpesialisasi = spesialisasiDokterDb.findAllBySpesialisasiIdSpesialisasi(idSpesialisasi);
+        List<JadwalJagaModel> listPoli = jadwalJagaDb.findAllByPoliIdPoli(idPoli);
+        List<DokterModel> spesialisasiList = new ArrayList<>();
+        for (SpesialisasiDokterModel spesialisasiDokter: listSpesialisasi) {
+            spesialisasiList.add(spesialisasiDokter.getDokter());
+        }
+        List<DokterModel> poliList = new ArrayList<>();
+        for (JadwalJagaModel jadwalJaga: listPoli) {
+            poliList.add(jadwalJaga.getDokter());
+        }
+        List<DokterModel> listDokter = new ArrayList<>();
+        for (DokterModel spesialisasiDokter : spesialisasiList) {
+            if (poliList.contains(spesialisasiDokter)) listDokter.add(spesialisasiDokter);
+        }
+
+        System.out.println (spesialisasiList);
+        System.out.println (poliList);
+        System.out.println (listDokter);
+        model.addAttribute("listSpesialisasi", spesialisasi);
+        model.addAttribute("listPoli", poli);
+        model.addAttribute("listDokter", listDokter);
+        return "form-cari-dokter";
+    }
+
+
 
 }

@@ -32,7 +32,7 @@ public class JadwalJagaController {
     private PoliService poliService;
 
     @Autowired
-    private JadwalJagaDb   jadwalJagaDb;
+    private JadwalJagaDb jadwalJagaDb;
 
     @RequestMapping(value = "/jadwal/tambah/{nip}", method = RequestMethod.GET)
     public String addJadwalDokterFormPage(@PathVariable String nip, Model model) {
