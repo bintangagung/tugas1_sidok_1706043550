@@ -226,6 +226,34 @@ public class DokterController {
         return "form-cari-dokter";
     }
 
+    @RequestMapping(value = "/cari/tugas-terbanyak", method = RequestMethod.GET)
+    public String cariDokterTersibukFormPage(Model model) {
+        List<PoliModel> listPoli = poliService.getListPoli();
+        model.addAttribute("listPoli",listPoli);
 
+        return "form-cari-dokter-tersibuk";
+    }
+
+    @RequestMapping(path = "/cari/bertugas-banyak", method = RequestMethod.GET, params = {"submit"})
+    public String cariDokterTersibukFormSubmit(@RequestParam(value = "idPoli",required = false) Long idPoli, Model model) {
+        PoliModel poli = poliService.getPoliByIdPoli(idPoli).get();
+        List<DokterModel> listDokter = dokterService.getListDokter();
+        DokterModel dokter = listDokter.get(0);
+//        for (DokterModel countDokter : listDokter) {
+//            if()
+//        }
+//        List<DokterModel> listDokter = new ArrayList<>();
+//        for (DokterModel spesialisasiDokter : spesialisasiList) {
+//            if (poliList.contains(spesialisasiDokter)) listDokter.add(spesialisasiDokter);
+//        }
+//
+//        List<PoliModel> poli = poliService.getListPoli();
+//        List<JadwalJagaModel> listPoli = jadwalJagaDb.findAllByPoliIdPoli(idPoli);
+//
+//        System.out.println (listDokter);
+//        model.addAttribute("listPoli", poli);
+//        model.addAttribute("listDokter", listDokter);
+        return "form-cari-dokter";
+    }
 
 }

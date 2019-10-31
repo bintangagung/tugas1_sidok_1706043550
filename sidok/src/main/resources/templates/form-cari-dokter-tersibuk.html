@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title> Jadwal </title>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <h2 style="text-align:left;"> Cari Dokter Yang Paling Banyak Bertugas di Poli </h2>
+            <form th:action="@{/cari/tugas-terbanyak}" class="form-group" method="GET">
+                <label class="col-sm-1 control-label">Poli</label>
+                <select class="form-control-sm" name="idPoli">
+                    <option th:each="poli, iterationStatus : ${listPoli}"
+                            th:value="${poli.idPoli}"
+                            th:text="${poli.nama}"></option>
+                </select> <br>
+                <button type="submit" class="btn-sm btn-primary" name="submit"> Submit </button>
+            </form>
+
+            <h3 class="badge-light text-lg-center"> Detail Dokter </h3>
+            <p th:text = "'Nama           : ' +${dokter.nama}"></p>
+            <p th:text = "'Nik           : ' +${dokter.nik}"></p>
+            <p th:text = "'Tempat Lahir           : ' +${dokter.tempatLahir}"></p>
+            <p th:text = "'Tanggal Lahir           : ' +${dokter.tanggalLahir}"></p>
+            <p th:text = "'Jenis Kelamin           : ' +${dokter.jenisKelamin}"></p>
+            <p th:text = "'Spesialis           : '"></p>
+            <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
+                <p th:text="${spesialisasiDokter.spesialisasi.nama}"></p>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+</body>
+<nav th:replace="fragments/fragment :: footer"></nav>
+
+</html>
