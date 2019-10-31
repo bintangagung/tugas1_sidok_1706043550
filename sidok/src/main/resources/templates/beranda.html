@@ -17,40 +17,34 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>No</th>
+                <b><th>No</th>
                 <th>Nama</th>
                 <th>NIP</th>
                 <th>NIK</th>
                 <th>Jenis Kelamin</th>
                 <th>Spesialisasi</th>
-                <th>            </th>
+                <th>            </th> </b>
             </tr>
         </thead>
         <tbody>
         <tr th:each="dokter, iterationStatus: ${listDokter}">
-            <td><h5 th:text = ${iterationStatus.count}></h5></td>
+            <td><h6 th:text = ${iterationStatus.count}></h6></td>
 
-            <td><h5><a th:text = ${dokter.nama} th:href="@{/dokter?nikDokter=}+${dokter.nik}"></a></h5></td>
+            <td><h6><a th:text = ${dokter.nama} th:href="@{/dokter?nikDokter=}+${dokter.nik}"></a></h6></td>
 
-            <td><h5 th:text = ${dokter.nip}></h5></td>
-            <td><h5 th:text = ${dokter.nik}></h5></td>
-            <td><h5 th:text = ${dokter.jenisKelamin}></h5></td>
+            <td><h6 th:text = ${dokter.nip}></h6></td>
+            <td><h6 th:text = ${dokter.nik}></h6></td>
+            <td><h6 th:text = ${dokter.jenisKelamin}></h6></td>
             <td>
-                <h5 th:if="${dokter.listSpesialisasi.size() == 0}" th:text="'-'"></h5>
+                <h6 th:if="${dokter.listSpesialisasi.size() == 0}" th:text="'-'"></h6>
                 <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
-                    <h5 th:text="${spesialisasiDokter.spesialisasi.nama}"></h5>
+                    <h7 th:text="${spesialisasiDokter.spesialisasi.nama}"></h7>
                 </div>
             </td>
             <td>
-                <form th:action="@{/jadwal/tambah/}+${dokter.nip}">
-                    <button class="btn btn-sm btn-primary">Tambah Jadwal</button>
-                </form>
-                <form th:action="@{/dokter/update/}+${dokter.idDokter}">
-                    <button class="btn btn-sm btn-dark">Ubah</button>
-                </form>
-                <form th:action="@{/dokter/delete/}+${dokter.idDokter}">
-                    <button class="btn btn-sm btn-danger">hapus</button>
-                </form>
+                <a th:href="@{/jadwal/tambah/}+${dokter.nip}" class="btn btn-sm btn-primary">Tambah Jadwal</a>
+                <a th:href="@{/dokter/update/}+${dokter.idDokter}" class="btn btn-sm btn-dark">Ubah</a>
+                <a th:href="@{/dokter/delete/}+${dokter.idDokter}" class="btn btn-sm btn-danger">hapus</a>
             </td>
         </tr>
         </tbody>

@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
-            <h3 class="badge-light text-lg-left"> Jumlah Dokter Untuk Setiap Spesialisasi </h3>
+            <h4 class="badge-light text-lg-left"> Jumlah Dokter Untuk Setiap Spesialisasi </h4>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -26,9 +26,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="spesialisasi, iterationStatus: ${listSpesialisasi}">
-                    <td><h5 th:text = ${iterationStatus.count}></h5></td>
-                    <td><h5 th:text = ${spesialisasi.nama}></h5></td>
-                    <td><h5 th:text = ${spesialisasi.getListDokter().size()}></h5></td>
+                    <td><h6 th:text = ${iterationStatus.count}></h6></td>
+                    <td><h6 th:text = ${spesialisasi.nama}></h6></td>
+                    <td><h6 th:text = ${spesialisasi.getListDokter().size()}></h6></td>
                 </tr>
                 </tbody>
             </table>

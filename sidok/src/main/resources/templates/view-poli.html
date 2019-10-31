@@ -14,7 +14,7 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
         <h2 style="text-align:center;"> Sistem Informasi Dokter </h2>
-        <h3 class="badge-light text-lg-left" th:text = "'Daftar Dokter yang bertugas di '+${poli.nama}"></h3>
+        <h4 class="badge-light text-lg-left" th:text = "'Daftar Dokter yang bertugas di '+${poli.nama}"></h4>
         <table class="table table-striped">
             <thead>
             <th>No</th>
@@ -23,9 +23,9 @@
             </thead>
         <tbody>
         <tr th:each="dokter, iterationStatus: ${dokterList}">
-            <td><h5 th:text = ${iterationStatus.count}></h5></td>
-            <td><h5 th:text = ${dokter.dokter.nama}></h5></td>
-            <td><h5 th:each="spesialisasi : ${dokter.dokter.listSpesialisasi}" th:text="${spesialisasi.spesialisasi.nama}"></h5></td>
+            <td><h6 th:text = ${iterationStatus.count}></h6></td>
+            <td><h6 th:text = ${dokter.dokter.nama}></h6></td>
+            <td><h7 th:each="spesialisasi : ${dokter.dokter.listSpesialisasi}" th:text="${spesialisasi.spesialisasi.nama}"></h7></td>
         </tr>
         </tbody>
         </table>

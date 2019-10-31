@@ -12,7 +12,7 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container-fluid">
-    <h2 style="text-align:left;"> Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu </h2>
+    <h4 style="text-align:left;"> Cari Dokter Berdasarkan Spesialisasi dan Poli Tertentu </h4>
     <form th:action="@{/cari}" class="form-group" method="GET">
         <label class="col-sm-1 control-label">Spesialisasi</label>
         <select class="form-control-sm" name="idSpesialisasi">
@@ -46,13 +46,13 @@
         </thead>
         <tbody>
         <tr th:each="dokter, iterationStatus: ${listDokter}">
-            <td><h5 th:text = ${iterationStatus.count}></h5></td>
-            <td><h5 th:text = ${dokter.nama}></h5></td>
-            <td><h5 th:text = ${dokter.nip}></h5></td>
-            <td><h5 th:text = ${dokter.nik}></h5></td>
-            <td><h5 th:text = ${dokter.jenisKelamin}></h5></td>
+            <td><h6 th:text = ${iterationStatus.count}></h6></td>
+            <td><h6 th:text = ${dokter.nama}></h6></td>
+            <td><h6 th:text = ${dokter.nip}></h6></td>
+            <td><h6 th:text = ${dokter.nik}></h6></td>
+            <td><h6 th:text = ${dokter.jenisKelamin}></h6></td>
             <td><div th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
-                <h5 th:text="${spesialisasiDokter.spesialisasi .nama}"></h5>
+                <h7 th:text="${spesialisasiDokter.spesialisasi .nama}"></h7>
             </div>
             </td>
         </tr>

@@ -19,7 +19,8 @@
 
             <form th:action="@{/jadwal/tambah/}+${dokter.nip}" class="form-group" th:objects="${jadwalJaga}" method="POST">
                 <label class="col-sm-1 control-label">Dokter</label>
-                <label class="col-sm-1 control-label" th:text="${dokter.nama}"></label> <br>
+                <label class="col-sm-1 control-label" th:text="${dokter.nama}"></label>
+                <br>
                 <label class="col-sm-1 control-label">Poli</label>
                 <select class="form-control-sm" th:field = ${jadwalJaga.poli.idPoli}>
                 <option th:each="poli, iterationStatus : ${listPoli}"

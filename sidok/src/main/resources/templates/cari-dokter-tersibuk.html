@@ -15,7 +15,8 @@
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
-            <h2 style="text-align:left;"> Cari Dokter Yang Paling Banyak Bertugas di Poli </h2>
+            <h5 style="text-align:left;"> Cari Dokter Yang Paling Banyak Bertugas di Poli </h5>
+            <br>
             <form th:action="@{/cari/tugas-terbanyak}" class="form-group" method="GET">
                 <label class="col-sm-1 control-label">Poli</label>
                 <select class="form-control-sm" name="idPoli">
@@ -38,6 +39,8 @@
                         <div th:unless="${dokter.listSpesialisasi.size() == 0}"th:each = "spesialisasiDokter: ${dokter.listSpesialisasi}">
                             <p th:text="${spesialisasiDokter.spesialisasi.nama}"></p>
                         </div>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
